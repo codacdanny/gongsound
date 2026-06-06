@@ -1,0 +1,72 @@
+"use client";
+
+import { ArrowUpRight, MapPin, Ticket } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
+import { TOURS } from "@/lib/content";
+import { useReveal } from "@/lib/anim";
+
+export default function Tours() {
+  const ref = useReveal<HTMLDivElement>();
+
+  return (
+    <section id="tours" ref={ref} className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <SectionHeading index="05" kicker="Events & tours" />
+            <h2 className="reveal display mt-6 max-w-2xl text-4xl text-ivory sm:text-5xl lg:text-6xl">
+              The movement <span className="text-gold-grad">begins at home.</span>
+            </h2>
+          </div>
+          <a
+            href="#contact"
+            className="reveal link-sweep self-start text-sm font-semibold uppercase tracking-[0.16em] text-gold md:self-end"
+          >
+            View all tours
+          </a>
+        </div>
+
+        <div className="mt-14 flex flex-col gap-4">
+          {TOURS.map((t, i) => (
+            <article
+              key={i}
+              style={{ transitionDelay: `${i * 80}ms` }}
+              className="reveal group grid grid-cols-1 items-center gap-6 rounded-2xl border border-line bg-bg-raise/40 p-6 transition-colors hover:border-gold/40 sm:grid-cols-[auto_1fr_auto] sm:p-8"
+            >
+              {/* Date block */}
+              <div className="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-0">
+                <span className="text-gold-grad font-display text-5xl font-extrabold leading-none sm:text-6xl">
+                  {t.day}
+                </span>
+                <span className="label text-gold">{t.month} 2025</span>
+              </div>
+
+              <div className="sm:border-l sm:border-line sm:pl-8">
+                <h3 className="font-display text-2xl font-bold text-ivory transition-colors group-hover:text-gold sm:text-3xl">
+                  {t.title}
+                </h3>
+                <p className="mt-2 flex items-center gap-1.5 text-sm text-ivory/60">
+                  <MapPin className="h-4 w-4 text-gold" aria-hidden />
+                  {t.place}
+                </p>
+                <p className="mt-1 font-serif text-sm italic text-gold/90">
+                  {t.note}
+                </p>
+              </div>
+
+              <a
+                href="#contact"
+                data-cursor-label="Tickets"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:bg-gold hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              >
+                <Ticket className="h-4 w-4" aria-hidden />
+                Tickets
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
