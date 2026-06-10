@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import SoundWave from "@/components/SoundWave";
+import { ArrowRight } from "lucide-react";
 import { NAV, SITE } from "@/lib/content";
 
 export default function Footer() {
@@ -42,6 +41,13 @@ export default function Footer() {
               A culturally rooted entertainment company. {SITE.location},{" "}
               {SITE.country}.
             </p>
+            <a
+              href="#contact"
+              className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-bg transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+            >
+              Get in touch
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </a>
           </div>
 
           <nav aria-label="Footer">
