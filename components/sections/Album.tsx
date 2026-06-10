@@ -68,7 +68,7 @@ export default function Album() {
                 type="button"
                 aria-label={`Play ${ALBUM.title} by ${ALBUM.artist}`}
                 data-cursor-label="Play"
-                className="absolute right-6 top-1/2 flex h-16 w-16 -translate-y-1/2 items-center justify-center rounded-full bg-gold text-bg shadow-[0_0_40px_rgba(230,184,76,0.4)] transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-bright focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                className="absolute inset-0 m-auto flex h-16 w-16 items-center justify-center rounded-full bg-gold text-bg shadow-[0_0_40px_rgba(230,184,76,0.4)] transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-bright focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
                 <Play className="h-6 w-6 translate-x-0.5 fill-bg" aria-hidden />
               </button>
