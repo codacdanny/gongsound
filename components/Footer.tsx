@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import SoundWave from "@/components/SoundWave";
 import { NAV, SITE } from "@/lib/content";
 
 export default function Footer() {
