@@ -4,97 +4,46 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
 /**
- * Generates a soothing ambient pad using Web Audio API.
- * Multiple sine wave oscillators at low frequencies create a calm, evolving soundscape.
+ * Background ambient music player. Plays automatically (unmuted) on page load.
+ * User can mute/unmute with the button in the corner.
  */
 export default function BackgroundMusic() {
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const oscillatorsRef = useRef<OscillatorNode[]>([]);
-  const [isMuted, setIsMuted] = useState(true);
-  const masterGainRef = useRef<GainNode | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    const initAudio = async () => {
-      try {
-        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-        const audioContext = new AudioContext();
-        audioContextRef.current = audioContext;
+    // Create and setup audio element
+    const audio = new Audio("/ambient.mp3");
+    audio.loop = true;
+    audio.volume = 0.25; // 25% volume, soothing level
+    audioRef.current = audio;
 
-        // Master volume control
-        const masterGain = audioContext.createGain();
-        masterGain.connect(audioContext.destination);
-        masterGain.gain.value = 0; // Start muted for browser autoplay policy
-        masterGainRef.current = masterGain;
-
-        // Create a soothing pad: multiple low-frequency sine waves
-        const baseFrequencies = [55, 110, 165]; // Low bass notes (A1, A2, A3)
-
-        baseFrequencies.forEach((baseFreq, idx) => {
-          const osc = audioContext.createOscillator();
-          const gainNode = audioContext.createGain();
-
-          osc.type = "sine";
-          osc.frequency.value = baseFreq;
-
-          // Soft, subtle volume (0.06 - 0.12 range for each oscillator)
-          gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
-
-          // Gentle LFO modulation for evolving texture (very slow)
-          const lfo = audioContext.createOscillator();
-          const lfoGain = audioContext.createGain();
-          lfo.frequency.value = 0.05 + idx * 0.02; // Slow evolving: 0.05, 0.07, 0.09 Hz
-          lfoGain.gain.value = 0.015; // Subtle pitch variation
-
-          lfo.connect(lfoGain);
-          lfoGain.connect(osc.frequency);
-
-          // Connect oscillator to master
-          osc.connect(gainNode);
-          gainNode.connect(masterGain);
-
-          // Start both oscillators
-          osc.start();
-          lfo.start();
-
-          oscillatorsRef.current.push(osc);
-        });
-      } catch (err) {
-        console.warn("Background music failed to initialize:", err);
-      }
-    };
-
-    // Initialize on first interaction or immediately
-    initAudio();
+    // Try to autoplay (unmuted by default)
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((err) => {
+        // Autoplay blocked by browser; user will need to click unmute button
+        console.warn("Autoplay blocked:", err);
+        setIsMuted(true);
+      });
+    }
 
     return () => {
-      // Cleanup: stop all oscillators
-      oscillatorsRef.current.forEach((osc) => {
-        try {
-          osc.stop();
-        } catch (e) {}
-      });
-      oscillatorsRef.current = [];
+      audio.pause();
+      audio.currentTime = 0;
     };
   }, []);
 
   const toggleMute = () => {
-    if (!masterGainRef.current || !audioContextRef.current) return;
+    if (!audioRef.current) return;
 
     if (isMuted) {
-      // Fade in
-      masterGainRef.current.gain.setTargetAtTime(
-        0.12,
-        audioContextRef.current.currentTime,
-        0.15,
-      );
+      // Unmute
+      audioRef.current.play().catch(console.warn);
       setIsMuted(false);
     } else {
-      // Fade out
-      masterGainRef.current.gain.setTargetAtTime(
-        0,
-        audioContextRef.current.currentTime,
-        0.5,
-      );
+      // Mute
+      audioRef.current.pause();
       setIsMuted(true);
     }
   };
