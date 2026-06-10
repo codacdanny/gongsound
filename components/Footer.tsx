@@ -1,13 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { Lock } from "lucide-react";
 import SoundWave from "@/components/SoundWave";
 import { NAV, SITE } from "@/lib/content";
 
 export default function Footer() {
   return (
-    <footer id="admin" className="relative border-t border-line pt-20">
+    <footer className="relative border-t border-line pt-20">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         {/* Big closing wordmark */}
         <div className="relative">
@@ -43,13 +42,6 @@ export default function Footer() {
               A culturally rooted entertainment company. {SITE.location},{" "}
               {SITE.country}.
             </p>
-            <a
-              href="#contact"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/40 px-5 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold transition-all hover:bg-gold hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-            >
-              <Lock className="h-3.5 w-3.5" aria-hidden />
-              Admin Login
-            </a>
           </div>
 
           <nav aria-label="Footer">

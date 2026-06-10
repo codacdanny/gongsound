@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Lock, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { NAV } from "@/lib/content";
 
 function Wordmark({ onClick }: { onClick?: () => void }) {
@@ -75,13 +75,6 @@ export default function Nav() {
           </ul>
 
           <div className="flex items-center gap-3">
-            <a
-              href="#admin"
-              className="hidden items-center gap-2 rounded-full border border-gold/40 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-gold transition-all hover:border-gold hover:bg-gold hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:flex"
-            >
-              <Lock className="h-3.5 w-3.5" aria-hidden />
-              Admin
-            </a>
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -133,17 +126,6 @@ export default function Nav() {
                 </motion.li>
               ))}
             </ul>
-
-            <div className="px-6 pb-10">
-              <a
-                href="#admin"
-                onClick={() => setOpen(false)}
-                className="inline-flex items-center gap-2 rounded-full border border-gold/40 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-gold"
-              >
-                <Lock className="h-4 w-4" aria-hidden />
-                Admin Login
-              </a>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
