@@ -85,7 +85,7 @@ export default function Cursor() {
       >
         <span
           ref={labelRef}
-          className="label !text-[0.5rem] !tracking-[0.2em] !text-bg opacity-0 transition-opacity duration-200 group-data-[label=1]:opacity-100"
+          className="label !text-[0.5rem] !tracking-[0.2em] !text-bg text-center opacity-0 transition-opacity duration-200 group-data-[label=1]:opacity-100"
         />
       </div>
     </div>
