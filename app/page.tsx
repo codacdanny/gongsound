@@ -1,6 +1,7 @@
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import Preloader from "@/components/Preloader";
 import Cursor from "@/components/Cursor";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
@@ -17,6 +18,7 @@ export default function Home() {
     <>
       <Preloader />
       <Cursor />
+      <BackgroundMusic />
       <SmoothScroll>
         <Nav />
         <main>
