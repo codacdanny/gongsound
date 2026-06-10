@@ -18,54 +18,65 @@ export default function Tours() {
               The movement <span className="text-gold-grad">begins at home.</span>
             </h2>
           </div>
-          <a
-            href="#contact"
-            className="reveal link-sweep self-start text-sm font-semibold uppercase tracking-[0.16em] text-gold md:self-end"
-          >
-            View all tours
-          </a>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4">
-          {TOURS.map((t, i) => (
-            <article
-              key={i}
-              style={{ transitionDelay: `${i * 80}ms` }}
-              className="reveal group grid grid-cols-1 items-center gap-6 rounded-2xl border border-line bg-bg-raise/40 p-6 transition-colors hover:border-gold/40 sm:grid-cols-[auto_1fr_auto] sm:p-8"
-            >
-              {/* Date block */}
-              <div className="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-0">
-                <span className="text-gold-grad font-display text-5xl font-extrabold leading-none sm:text-6xl">
-                  {t.day}
-                </span>
-                <span className="label text-gold">{t.month} 2025</span>
-              </div>
-
-              <div className="sm:border-l sm:border-line sm:pl-8">
-                <h3 className="font-display text-2xl font-bold text-ivory transition-colors group-hover:text-gold sm:text-3xl">
-                  {t.title}
-                </h3>
-                <p className="mt-2 flex items-center gap-1.5 text-sm text-ivory/60">
-                  <MapPin className="h-4 w-4 text-gold" aria-hidden />
-                  {t.place}
-                </p>
-                <p className="mt-1 font-serif text-sm italic text-gold/90">
-                  {t.note}
-                </p>
-              </div>
-
-              <a
-                href="#contact"
-                data-cursor-label="Tickets"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:bg-gold hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+        {TOURS.length > 0 ? (
+          <div className="mt-14 flex flex-col gap-4">
+            {TOURS.map((t, i) => (
+              <article
+                key={i}
+                style={{ transitionDelay: `${i * 80}ms` }}
+                className="reveal group grid grid-cols-1 items-center gap-6 rounded-2xl border border-line bg-bg-raise/40 p-6 transition-colors hover:border-gold/40 sm:grid-cols-[auto_1fr_auto] sm:p-8"
               >
-                <Ticket className="h-4 w-4" aria-hidden />
-                Tickets
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-              </a>
-            </article>
-          ))}
-        </div>
+                {/* Date block */}
+                <div className="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-0">
+                  <span className="text-gold-grad font-display text-5xl font-extrabold leading-none sm:text-6xl">
+                    {t.day}
+                  </span>
+                  <span className="label text-gold">{t.month} 2025</span>
+                </div>
+
+                <div className="sm:border-l sm:border-line sm:pl-8">
+                  <h3 className="font-display text-2xl font-bold text-ivory transition-colors group-hover:text-gold sm:text-3xl">
+                    {t.title}
+                  </h3>
+                  <p className="mt-2 flex items-center gap-1.5 text-sm text-ivory/60">
+                    <MapPin className="h-4 w-4 text-gold" aria-hidden />
+                    {t.place}
+                  </p>
+                  <p className="mt-1 font-serif text-sm italic text-gold/90">
+                    {t.note}
+                  </p>
+                </div>
+
+                <a
+                  href="#contact"
+                  data-cursor-label="Tickets"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:bg-gold hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                >
+                  <Ticket className="h-4 w-4" aria-hidden />
+                  Tickets
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                </a>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-14 flex flex-col items-center justify-center rounded-2xl border border-line/50 bg-bg-raise/30 py-20 text-center">
+            <span className="label mb-4 text-gold">Coming soon</span>
+            <h3 className="display text-3xl text-ivory">Dates coming soon.</h3>
+            <p className="mt-3 max-w-md text-sm text-ivory/60">
+              Tours and events are being planned. Sign up for updates and be
+              the first to know when we announce our next stop.
+            </p>
+            <a
+              href="#contact"
+              className="reveal mt-8 inline-flex items-center gap-3 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:border-gold hover:bg-gold hover:text-bg"
+            >
+              Get updates
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -47,13 +47,13 @@ export const ABOUT = {
     "We discover raw talent and develop it with intention — pairing timeless songwriting with world-class production so that the music we release outlives the moment it was made in.",
     "From the studio to the stage, every release and every show is engineered to celebrate who we are. This is not just entertainment. It is identity, sound, and legacy moving as one.",
   ],
-  ceoName: "Chairman Crexus",
-  ceoRole: "Founder & Chief Executive",
+  ceoName: "Vincent Agbonilahor",
+  ceoRole: "Chief Executive Officer (CEO)",
   ceoQuote:
     "We are not chasing trends. We are building a legacy that begins at home and travels far.",
   stats: [
     { value: "01", label: "Home — Benin City" },
-    { value: "12", label: "Artists on the debut album" },
+    { value: "10", label: "Artists on the debut album" },
     { value: "05", label: "Pillars of the business" },
     { value: "∞", label: "Culture to amplify" },
   ],
@@ -99,9 +99,7 @@ export const ARTISTS = [
   "Jacky Sula",
   "Lars-K",
   "Kabaka",
-  "Stanley Yonwaan",
   "Ire",
-  "Kingpin",
   "Finn",
   "Alaska Agho",
   "Jaytunes",
@@ -118,22 +116,13 @@ export const ALBUM = {
   featuring: ARTISTS,
 } as const;
 
-export const TOURS = [
-  {
-    day: "24",
-    month: "Aug",
-    title: "Gongsound Live in Benin City",
-    place: "Benin City, Edo State",
-    note: "The movement begins at home.",
-  },
-  {
-    day: "21",
-    month: "Sep",
-    title: "Culture in Motion Tour",
-    place: "Benin City, Edo State",
-    note: "Music. Culture. Connection.",
-  },
-] as const;
+export const TOURS: ReadonlyArray<{
+  day: string;
+  month: string;
+  title: string;
+  place: string;
+  note: string;
+}> = [];
 
 export const NEWS = [
   {

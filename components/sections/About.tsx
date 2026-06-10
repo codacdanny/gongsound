@@ -38,7 +38,7 @@ export default function About() {
           </div>
 
           {/* Floating quote card */}
-          <div className="reveal absolute -right-3 -top-6 max-w-[16rem] rounded-xl border border-gold/30 bg-bg-raise/90 p-5 backdrop-blur-md sm:-right-8">
+          <div className="reveal absolute -right-3 -bottom-8 max-w-[16rem] rounded-xl border border-gold/30 bg-bg-raise/90 p-5 backdrop-blur-md sm:-right-8 sm:-bottom-12">
             <Quote className="mb-2 h-5 w-5 text-gold" aria-hidden />
             <p className="font-serif text-sm italic leading-relaxed text-ivory/90">
               {ABOUT.ceoQuote}
