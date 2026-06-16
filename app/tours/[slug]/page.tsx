@@ -6,9 +6,10 @@ import { TOURS } from "@/lib/content";
 import { getTourBySlug } from "@/lib/utils";
 import { useReveal } from "@/lib/anim";
 
-export default function TourPage({ params }: { params: { slug: string } }) {
+export default async function TourPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const ref = useReveal<HTMLDivElement>();
-  const tour = getTourBySlug(params.slug, TOURS);
+  const tour = getTourBySlug(resolvedParams.slug, TOURS);
 
   if (!tour) {
     return (
@@ -35,11 +36,11 @@ export default function TourPage({ params }: { params: { slug: string } }) {
       <div className="mx-auto max-w-4xl">
         {/* Back button */}
         <Link
-          href="/tours"
+          href="/"
           className="reveal inline-flex items-center gap-2 text-sm text-gold/70 transition-colors hover:text-gold mb-12"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
-          Back to tours
+          Back to home
         </Link>
 
         {/* Date badge */}

@@ -52,15 +52,14 @@ export default function Tours() {
                   </p>
                 </div>
 
-                <a
-                  href="#contact"
-                  data-cursor-label="Tickets"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:bg-gold hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                <div
+                  data-cursor-label="View details"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold pointer-events-none"
                 >
                   <Ticket className="h-4 w-4" aria-hidden />
                   View details
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-                </a>
+                </div>
               </Link>
             ))}
           </div>

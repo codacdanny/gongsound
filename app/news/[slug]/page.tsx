@@ -6,9 +6,10 @@ import { NEWS } from "@/lib/content";
 import { getArticleBySlug } from "@/lib/utils";
 import { useReveal } from "@/lib/anim";
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const ref = useReveal<HTMLDivElement>();
-  const article = getArticleBySlug(params.slug, NEWS);
+  const article = getArticleBySlug(resolvedParams.slug, NEWS);
 
   if (!article) {
     return (
@@ -35,11 +36,11 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       <div className="mx-auto max-w-3xl">
         {/* Back button */}
         <Link
-          href="/news"
+          href="/"
           className="reveal inline-flex items-center gap-2 text-sm text-gold/70 transition-colors hover:text-gold mb-12"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
-          Back to news
+          Back to home
         </Link>
 
         {/* Meta */}
