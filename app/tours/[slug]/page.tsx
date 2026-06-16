@@ -1,13 +1,14 @@
 "use client";
 
+import { use } from "react";
 import { ArrowLeft, MapPin, Calendar, Clock, Ticket } from "lucide-react";
 import Link from "next/link";
 import { TOURS } from "@/lib/content";
 import { getTourBySlug } from "@/lib/utils";
 import { useReveal } from "@/lib/anim";
 
-export default async function TourPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = await params;
+export default function TourPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = use(params);
   const ref = useReveal<HTMLDivElement>();
   const tour = getTourBySlug(resolvedParams.slug, TOURS);
 

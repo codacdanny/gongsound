@@ -1,13 +1,14 @@
 "use client";
 
+import { use } from "react";
 import { ArrowLeft, Calendar } from "lucide-react";
 import Link from "next/link";
 import { NEWS } from "@/lib/content";
 import { getArticleBySlug } from "@/lib/utils";
 import { useReveal } from "@/lib/anim";
 
-export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = await params;
+export default function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = use(params);
   const ref = useReveal<HTMLDivElement>();
   const article = getArticleBySlug(resolvedParams.slug, NEWS);
 
