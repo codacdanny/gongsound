@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { NEWS } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
+import { titleToSlug } from "@/lib/utils";
 
 export default function News() {
   const ref = useReveal<HTMLDivElement>();
@@ -18,19 +20,19 @@ export default function News() {
               Stories from the <span className="font-serif italic text-gold">culture.</span>
             </h2>
           </div>
-          <a
-            href="#contact"
+          <Link
+            href="/news"
             className="reveal link-sweep self-start text-sm font-semibold uppercase tracking-[0.16em] text-gold md:self-end"
           >
             Read more
-          </a>
+          </Link>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {NEWS.map((n, i) => (
-            <a
+            <Link
               key={i}
-              href="#contact"
+              href={`/news/${titleToSlug(n.title)}`}
               data-cursor-label="Read"
               style={{ transitionDelay: `${i * 80}ms` }}
               className="reveal group flex flex-col rounded-2xl border border-line bg-bg-raise/40 p-7 transition-colors hover:border-gold/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
@@ -53,7 +55,7 @@ export default function News() {
                 Read story
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

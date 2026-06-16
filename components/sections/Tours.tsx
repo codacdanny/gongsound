@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowUpRight, MapPin, Ticket } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { TOURS } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
+import { titleToSlug } from "@/lib/utils";
 
 export default function Tours() {
   const ref = useReveal<HTMLDivElement>();
@@ -23,8 +25,9 @@ export default function Tours() {
         {TOURS.length > 0 ? (
           <div className="mt-14 flex flex-col gap-4">
             {TOURS.map((t, i) => (
-              <article
+              <Link
                 key={i}
+                href={`/tours/${titleToSlug(t.title)}`}
                 style={{ transitionDelay: `${i * 80}ms` }}
                 className="reveal group grid grid-cols-1 items-center gap-6 rounded-2xl border border-line bg-bg-raise/40 p-6 transition-colors hover:border-gold/40 sm:grid-cols-[auto_1fr_auto] sm:p-8"
               >
@@ -55,10 +58,10 @@ export default function Tours() {
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:bg-gold hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                 >
                   <Ticket className="h-4 w-4" aria-hidden />
-                  Tickets
+                  View details
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
                 </a>
-              </article>
+              </Link>
             ))}
           </div>
         ) : (
