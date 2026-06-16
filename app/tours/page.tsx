@@ -4,6 +4,7 @@ import { MapPin, Calendar, Clock, Ticket, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { TOURS, SITE } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
+import { titleToSlug } from "@/lib/utils";
 
 export default function ToursPage() {
   const ref = useReveal<HTMLDivElement>();
@@ -77,13 +78,13 @@ export default function ToursPage() {
                 )}
 
                 {/* CTA */}
-                <a
-                  href={tour.ticketUrl || "#contact"}
+                <Link
+                  href={`/tours/${titleToSlug(tour.title)}`}
                   className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:bg-gold hover:text-bg"
                 >
                   <Ticket className="h-4 w-4" aria-hidden />
-                  Get tickets
-                </a>
+                  View details
+                </Link>
               </div>
             ))}
           </div>

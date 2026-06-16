@@ -5,6 +5,7 @@ import { Calendar, ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { NEWS } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
+import { titleToSlug } from "@/lib/utils";
 
 export default function NewsPage() {
   const ref = useReveal<HTMLDivElement>();
@@ -99,13 +100,13 @@ export default function NewsPage() {
               )}
 
               {/* CTA */}
-              <a
-                href="#contact"
+              <Link
+                href={`/news/${titleToSlug(article.title)}`}
                 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all group-hover:translate-x-1"
               >
                 Read story
                 <ArrowRight className="h-4 w-4" aria-hidden />
-              </a>
+              </Link>
             </article>
           ))}
         </div>
