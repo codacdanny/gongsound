@@ -16,13 +16,13 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-  { label: "Home", id: "home" },
-  { label: "About", id: "about" },
-  { label: "Artists", id: "artists" },
-  { label: "Music", id: "music" },
-  { label: "Events & Tours", id: "tours" },
-  { label: "News", id: "news" },
-  { label: "Contact", id: "contact" },
+  { label: "Home", id: "home", href: "/" },
+  { label: "About", id: "about", href: "/#about" },
+  { label: "Artists", id: "artists", href: "/#artists" },
+  { label: "Music", id: "music", href: "/#music" },
+  { label: "Events & Tours", id: "tours", href: "/tours" },
+  { label: "News", id: "news", href: "/news" },
+  { label: "Contact", id: "contact", href: "/#contact" },
 ] as const;
 
 export const HERO = {
@@ -122,15 +122,59 @@ export const TOURS: ReadonlyArray<{
   title: string;
   place: string;
   note: string;
-}> = [];
+  venue?: string;
+  time?: string;
+  ticketUrl?: string;
+}> = [
+  {
+    day: "24",
+    month: "Aug",
+    title: "Gongsound Live in Benin City",
+    place: "Benin City, Edo State",
+    note: "The movement begins at home.",
+    venue: "Livespot Festival Grounds",
+    time: "7:00 PM - 11:00 PM WAT",
+    ticketUrl: "#contact",
+  },
+  {
+    day: "21",
+    month: "Sep",
+    title: "Culture in Motion Tour",
+    place: "Lagos, Nigeria",
+    note: "Music. Culture. Connection.",
+    venue: "Eko Hotel & Suites",
+    time: "6:00 PM - 10:30 PM WAT",
+    ticketUrl: "#contact",
+  },
+  {
+    day: "15",
+    month: "Oct",
+    title: "Legendary World Tour Kick-Off",
+    place: "Accra, Ghana",
+    note: "West African expansion begins.",
+    venue: "Adom Pavilion",
+    time: "8:00 PM WAT",
+    ticketUrl: "#contact",
+  },
+];
 
-export const NEWS = [
+export const NEWS: ReadonlyArray<{
+  tag: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  body?: string;
+  author?: string;
+  image?: string;
+}> = [
   {
     tag: "Release",
     date: "Aug 2025",
     title: "3Point6 announces debut album 'Legendary'",
     excerpt:
       "The label's flagship project brings twelve artists together for a record rooted in culture and built for the world.",
+    body: "Gongsound is thrilled to announce the release of 3Point6's debut album 'Legendary' — a bold statement of artistry, culture, and intent. Featuring twelve of West Africa's most compelling voices, the album showcases the depth and range of the Gongsound vision: raw talent, refined production, and timeless songwriting. From introspective ballads to dancefloor moments, Legendary is a masterclass in contemporary African music.",
+    author: "Gongsound Team",
   },
   {
     tag: "Tour",
@@ -138,6 +182,8 @@ export const NEWS = [
     title: "Gongsound Live returns to Benin City",
     excerpt:
       "Our first headline experience comes home — a night of sound, identity and legacy where the movement began.",
+    body: "The journey that began in Benin City is coming full circle. Gongsound Live will bring the complete roster of artists, producers, and collaborators home for a night of celebration. Expect an immersive experience: live performances, visual design, and a soundscape that honors the culture we amplify. This is where it all started. This is where we return.",
+    author: "Gongsound Presents",
   },
   {
     tag: "Studio",
@@ -145,6 +191,26 @@ export const NEWS = [
     title: "Inside the Gongsound production house",
     excerpt:
       "A look at how raw talent becomes timeless music inside the rooms where the Gongsound sound is made.",
+    body: "Behind every release is a meticulous process. We sat down with our production team to explore the sonic philosophy that defines Gongsound. From pre-production sessions to final mastering, discover how we balance artistic vision with technical excellence. The studio isn't just a room — it's a sanctuary where culture becomes sound.",
+    author: "Studio Insights",
+  },
+  {
+    tag: "Artist",
+    date: "Jul 2025",
+    title: "Meet the roster: Gongsound's debut artists",
+    excerpt:
+      "Twelve artists, one movement. Get to know the voices behind Legendary.",
+    body: "Each artist on the Gongsound roster brings a distinct voice and vision. From Akobe's lyrical precision to Alaska Agho's genre-bending approach, we celebrate the diversity and depth of our family. These are not just musicians — they are storytellers, innovators, and keepers of culture.",
+    author: "Artist Spotlight",
+  },
+  {
+    tag: "News",
+    date: "Jun 2025",
+    title: "Gongsound Entertainment officially launches",
+    excerpt:
+      "A new vision for African entertainment begins today.",
+    body: "Today marks the official launch of Gongsound Entertainment. Founded with a mission to discover, develop, and deliver world-class talent and experiences, Gongsound is a commitment to authenticity in entertainment. We are rooted in our culture, ambitious in our vision, and intentional in every move we make. The journey begins at home. Welcome to the movement.",
+    author: "Founder Statement",
   },
 ] as const;
 

@@ -65,7 +65,7 @@ export default function Nav() {
             {NAV.map((item) => (
               <li key={item.id}>
                 <a
-                  href={`#${item.id}`}
+                  href={(item as any).href || `#${item.id}`}
                   className="link-sweep text-[0.82rem] font-medium text-ivory/80 transition-colors hover:text-ivory"
                 >
                   {item.label}
@@ -117,7 +117,7 @@ export default function Nav() {
                   transition={{ delay: 0.08 + i * 0.05, ease: "easeOut" }}
                 >
                   <a
-                    href={`#${item.id}`}
+                    href={(item as any).href || `#${item.id}`}
                     onClick={() => setOpen(false)}
                     className="display block py-2 text-4xl text-ivory transition-colors hover:text-gold sm:text-5xl"
                   >
