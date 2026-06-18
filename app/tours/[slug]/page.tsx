@@ -1,24 +1,71 @@
 "use client";
 
-import { use } from "react";
+import { use, useState, useEffect } from "react";
 import { ArrowLeft, MapPin, Calendar, Clock, Ticket } from "lucide-react";
 import Link from "next/link";
-import { TOURS } from "@/lib/content";
-import { getTourBySlug } from "@/lib/utils";
 import { useReveal } from "@/lib/anim";
+import { titleToSlug } from "@/lib/utils";
+
+interface Tour {
+  id: string;
+  title: string;
+  month: string;
+  day: number;
+  place: string;
+  venue?: string;
+  time?: string;
+  note?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
 
 export default function TourPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const ref = useReveal<HTMLDivElement>();
-  const tour = getTourBySlug(resolvedParams.slug, TOURS);
+  const [tour, setTour] = useState<Tour | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!tour) {
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/tours");
+        if (!response.ok) {
+          throw new Error("Failed to fetch tours");
+        }
+        const tours: Tour[] = await response.json();
+        const foundTour = tours.find(
+          (t) => titleToSlug(t.title) === resolvedParams.slug
+        );
+        setTour(foundTour || null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTours();
+  }, [resolvedParams.slug]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-bg pt-32 pb-20 px-5 sm:px-8">
+        <div className="mx-auto max-w-[1400px] text-center py-20">
+          <p className="text-ivory/60">Loading tour...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (error || !tour) {
     return (
       <main className="min-h-screen bg-bg pt-32 pb-20 px-5 sm:px-8">
         <div className="mx-auto max-w-[1400px] text-center py-20">
           <h1 className="display text-4xl text-ivory mb-4">Tour not found.</h1>
           <p className="text-ivory/60 mb-8">
-            The tour you're looking for doesn't exist.
+            {error || "The tour you're looking for doesn't exist."}
           </p>
           <Link
             href="/tours"

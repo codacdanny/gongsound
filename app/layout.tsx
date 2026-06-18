@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
+import { ToasterProvider } from "@/components/Toaster";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -28,11 +29,27 @@ export const metadata: Metadata = {
   description:
     "A culturally rooted entertainment company from Benin City, Edo State — discovering, developing and delivering world-class talent and experiences that celebrate who we are.",
   metadataBase: new URL("https://gongsound.com"),
+  icons: {
+    icon: [
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "Gongsound Entertainment — We Amplify Culture",
     description:
       "Record label, artist management, music production, events & tours. The journey begins at home.",
     type: "website",
+    images: [
+      {
+        url: "/brand/logo.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "Gongsound Entertainment Logo",
+      },
+    ],
   },
 };
 
@@ -48,7 +65,10 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${serif.variable} ${sans.variable}`}
     >
-      <body className="grain antialiased">{children}</body>
+      <body className="grain antialiased">
+        <ToasterProvider />
+        {children}
+      </body>
     </html>
   );
 }

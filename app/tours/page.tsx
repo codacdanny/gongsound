@@ -1,13 +1,49 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { MapPin, Calendar, Clock, Ticket, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { TOURS, SITE } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
 import { titleToSlug } from "@/lib/utils";
 
+interface Tour {
+  id: string;
+  title: string;
+  month: string;
+  day: number;
+  place: string;
+  venue?: string;
+  time?: string;
+  note?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export default function ToursPage() {
   const ref = useReveal<HTMLDivElement>();
+  const [tours, setTours] = useState<Tour[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/tours");
+        if (!response.ok) {
+          throw new Error("Failed to fetch tours");
+        }
+        const data = await response.json();
+        setTours(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTours();
+  }, []);
 
   return (
     <main ref={ref} className="min-h-screen bg-bg pt-32 pb-20 px-5 sm:px-8">
@@ -31,10 +67,25 @@ export default function ToursPage() {
           </div>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-20">
+            <p className="text-ivory/60">Loading tours...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-20">
+            <p className="label mb-4 text-gold">Error</p>
+            <p className="text-ivory/60">{error}</p>
+          </div>
+        )}
+
         {/* Tours Grid */}
-        {TOURS.length > 0 ? (
+        {!loading && !error && tours.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {TOURS.map((tour, idx) => (
+            {tours.map((tour, idx) => (
               <div
                 key={idx}
                 style={{ transitionDelay: `${idx * 80}ms` }}

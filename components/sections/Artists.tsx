@@ -1,8 +1,13 @@
 "use client";
 
 import SectionHeading from "@/components/SectionHeading";
-import { ARTISTS } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
+import { useEffect, useState } from "react";
+
+interface Artist {
+  id: number;
+  name: string;
+}
 
 function initials(name: string) {
   return name
@@ -15,6 +20,21 @@ function initials(name: string) {
 
 export default function Artists() {
   const ref = useReveal<HTMLDivElement>();
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/artists")
+      .then((res) => res.json())
+      .then((data) => {
+        setArtists(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch artists", err);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <section id="artists" ref={ref} className="relative py-24 sm:py-32">
@@ -33,8 +53,8 @@ export default function Artists() {
         </div>
 
         <ul className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
-          {ARTISTS.map((name, i) => (
-            <li key={name} style={{ transitionDelay: `${(i % 4) * 60}ms` }} className="reveal">
+          {!isLoading && artists.map((artist, i) => (
+            <li key={artist.id} style={{ transitionDelay: `${(i % 4) * 60}ms` }} className="reveal">
               <a
                 href="#contact"
                 data-cursor-label="View"
@@ -49,12 +69,12 @@ export default function Artists() {
                   aria-hidden
                   className="text-gold-grad pointer-events-none absolute inset-0 flex items-center justify-center font-display text-6xl font-extrabold opacity-15 transition-all duration-500 group-hover:scale-110 group-hover:opacity-30 sm:text-7xl"
                 >
-                  {initials(name)}
+                  {initials(artist.name)}
                 </span>
 
                 <div className="relative">
                   <h3 className="font-display text-lg font-bold leading-tight text-ivory transition-colors group-hover:text-gold sm:text-xl">
-                    {name}
+                    {artist.name}
                   </h3>
                   <span className="label mt-1 block !text-[0.55rem] text-muted">
                     Artist

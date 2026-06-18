@@ -1,24 +1,70 @@
 "use client";
 
-import { use } from "react";
+import { use, useState, useEffect } from "react";
 import { ArrowLeft, Calendar } from "lucide-react";
 import Link from "next/link";
-import { NEWS } from "@/lib/content";
-import { getArticleBySlug } from "@/lib/utils";
 import { useReveal } from "@/lib/anim";
+import { titleToSlug } from "@/lib/utils";
+
+interface NewsArticle {
+  id: string;
+  title: string;
+  excerpt: string;
+  body?: string;
+  tag: string;
+  date: string;
+  author?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
 
 export default function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const ref = useReveal<HTMLDivElement>();
-  const article = getArticleBySlug(resolvedParams.slug, NEWS);
+  const [article, setArticle] = useState<NewsArticle | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!article) {
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/news");
+        if (!response.ok) {
+          throw new Error("Failed to fetch news");
+        }
+        const newsItems: NewsArticle[] = await response.json();
+        const foundArticle = newsItems.find(
+          (a) => titleToSlug(a.title) === resolvedParams.slug
+        );
+        setArticle(foundArticle || null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, [resolvedParams.slug]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-bg pt-32 pb-20 px-5 sm:px-8">
+        <div className="mx-auto max-w-[1400px] text-center py-20">
+          <p className="text-ivory/60">Loading article...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (error || !article) {
     return (
       <main className="min-h-screen bg-bg pt-32 pb-20 px-5 sm:px-8">
         <div className="mx-auto max-w-[1400px] text-center py-20">
           <h1 className="display text-4xl text-ivory mb-4">Story not found.</h1>
           <p className="text-ivory/60 mb-8">
-            The story you're looking for doesn't exist.
+            {error || "The story you're looking for doesn't exist."}
           </p>
           <Link
             href="/news"

@@ -3,12 +3,36 @@
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Ticket } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
-import { TOURS } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
 import { titleToSlug } from "@/lib/utils";
+import { useEffect, useState } from "react";
+
+interface Tour {
+  id: number;
+  title: string;
+  month: string;
+  day: number;
+  place: string;
+  note?: string;
+}
 
 export default function Tours() {
   const ref = useReveal<HTMLDivElement>();
+  const [tours, setTours] = useState<Tour[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/tours")
+      .then((res) => res.json())
+      .then((data) => {
+        setTours(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch tours", err);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <section id="tours" ref={ref} className="relative py-24 sm:py-32">
@@ -22,9 +46,9 @@ export default function Tours() {
           </div>
         </div>
 
-        {TOURS.length > 0 ? (
+        {!isLoading && tours.length > 0 ? (
           <div className="mt-14 flex flex-col gap-4">
-            {TOURS.map((t, i) => (
+            {tours.map((t, i) => (
               <Link
                 key={i}
                 href={`/tours/${titleToSlug(t.title)}`}

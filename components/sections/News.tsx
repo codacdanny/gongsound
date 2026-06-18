@@ -3,12 +3,35 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
-import { NEWS } from "@/lib/content";
 import { useReveal } from "@/lib/anim";
 import { titleToSlug } from "@/lib/utils";
+import { useEffect, useState } from "react";
+
+interface NewsArticle {
+  id: number;
+  title: string;
+  excerpt: string;
+  tag: string;
+  date: string;
+}
 
 export default function News() {
   const ref = useReveal<HTMLDivElement>();
+  const [articles, setArticles] = useState<NewsArticle[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/news")
+      .then((res) => res.json())
+      .then((data) => {
+        setArticles(data.slice(0, 3)); // Show latest 3
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch news", err);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <section id="news" ref={ref} className="relative py-24 sm:py-32">
@@ -29,7 +52,7 @@ export default function News() {
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {NEWS.map((n, i) => (
+          {!isLoading && articles.map((n, i) => (
             <Link
               key={i}
               href={`/news/${titleToSlug(n.title)}`}

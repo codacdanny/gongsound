@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  password String
+  role  String  @default("admin") // admin, editor
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tour {
+  id    Int     @id @default(autoincrement())
+  title String
+  month String
+  day   Int
+  place String
+  venue String?
+  time  String?
+  note  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model News {
+  id       Int     @id @default(autoincrement())
+  title    String
+  excerpt  String
+  body     String
+  tag      String
+  date     String
+  author   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Artist {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  role  String?
+  bio   String?
+  image String? // URL or storage path
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Album {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  image       String? // URL or storage path
+  artists     String  // comma-separated or JSON
+  releaseDate String?
+  streamingUrl String? // Link to streaming platform
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
