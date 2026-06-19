@@ -34,9 +34,10 @@ export default function ToursPage() {
           throw new Error("Failed to fetch tours");
         }
         const data = await response.json();
-        setTours(data);
+        setTours(Array.isArray(data) ? data : []);
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
+        setTours([]);
       } finally {
         setLoading(false);
       }
@@ -87,7 +88,7 @@ export default function ToursPage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {tours.map((tour, idx) => (
               <div
-                key={idx}
+                key={tour.id}
                 style={{ transitionDelay: `${idx * 80}ms` }}
                 className="reveal rounded-2xl border border-gold/30 bg-bg-raise/50 p-8 backdrop-blur-sm hover:border-gold/60 transition-colors"
               >
@@ -148,7 +149,7 @@ export default function ToursPage() {
               updates to be the first to know when tours are announced.
             </p>
             <a
-              href="#contact"
+              href="mailto:3point6@gongsoundentertainment.com"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-bg"
             >
               Get notified
@@ -167,7 +168,7 @@ export default function ToursPage() {
             hear from you.
           </p>
           <a
-            href="#contact"
+            href="mailto:3point6@gongsoundentertainment.com"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-bg"
           >
             Contact us

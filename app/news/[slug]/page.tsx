@@ -1,6 +1,7 @@
 "use client";
 
-import { use, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowLeft, Calendar } from "lucide-react";
 import Link from "next/link";
 import { useReveal } from "@/lib/anim";
@@ -18,14 +19,21 @@ interface NewsArticle {
   updatedAt?: string;
 }
 
-export default function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
+export default function ArticlePage() {
   const ref = useReveal<HTMLDivElement>();
+  const [slug, setSlug] = useState("");
   const [article, setArticle] = useState<NewsArticle | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const pathSlug = window.location.pathname.split("/").pop() || "";
+    setSlug(pathSlug);
+  }, []);
+
+  useEffect(() => {
+    if (!slug) return;
+
     const fetchNews = async () => {
       try {
         setLoading(true);
@@ -33,9 +41,10 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
         if (!response.ok) {
           throw new Error("Failed to fetch news");
         }
-        const newsItems: NewsArticle[] = await response.json();
+        const data = await response.json();
+        const newsItems = Array.isArray(data) ? data : [];
         const foundArticle = newsItems.find(
-          (a) => titleToSlug(a.title) === resolvedParams.slug
+          (a) => titleToSlug(a.title) === slug
         );
         setArticle(foundArticle || null);
       } catch (err) {
@@ -46,7 +55,7 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
     };
 
     fetchNews();
-  }, [resolvedParams.slug]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -120,7 +129,7 @@ export default function ArticlePage({ params }: { params: Promise<{ slug: string
           <div className="space-y-6">
             {(article.body || article.excerpt).split("\n\n").map((paragraph: string, idx: number) => (
               <p
-                key={idx}
+                key={`${article.id}-p-${idx}`}
                 style={{ transitionDelay: `${idx * 80}ms` }}
                 className="reveal text-lg leading-relaxed text-ivory/75"
               >

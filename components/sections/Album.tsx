@@ -26,8 +26,9 @@ export default function Album() {
     fetch("/api/albums")
       .then((res) => res.json())
       .then((data: Album[]) => {
-        if (data.length > 0) {
-          setAlbum(data[0]); // Get first album
+        const albums = Array.isArray(data) ? data : [];
+        if (albums.length > 0) {
+          setAlbum(albums[0]); // Get first album
         }
         setIsLoading(false);
       })
@@ -135,9 +136,9 @@ export default function Album() {
 
             <p className="reveal mt-10 label text-muted">Featuring</p>
             <div className="reveal mt-3 flex flex-wrap gap-2">
-              {album.artists.split(",").map((name) => (
+              {album.artists.split(",").map((name, idx) => (
                 <span
-                  key={name.trim()}
+                  key={`${name.trim()}-${idx}`}
                   className="rounded-full border border-line px-3.5 py-1.5 text-xs text-ivory/75 transition-colors hover:border-gold/50 hover:text-gold"
                 >
                   {name.trim()}

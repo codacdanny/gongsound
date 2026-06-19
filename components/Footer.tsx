@@ -44,7 +44,7 @@ export default function Footer() {
               {SITE.country}.
             </p>
             <a
-              href="#contact"
+              href="mailto:3point6@gongsoundentertainment.com"
               className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-bg transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               Get in touch

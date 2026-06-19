@@ -29,7 +29,7 @@ export default function Services() {
           {SERVICES.map((s, i) => (
             <a
               key={s.no}
-              href="#contact"
+              href="mailto:3point6@gongsoundentertainment.com"
               data-cursor-label={s.cta}
               style={{ transitionDelay: `${i * 60}ms` }}
               className="reveal group relative grid grid-cols-[auto_1fr] items-center gap-x-5 gap-y-2 border-b border-line py-7 transition-colors sm:grid-cols-[5rem_1fr_auto] sm:py-9"

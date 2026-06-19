@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 interface Artist {
   id: number;
   name: string;
+  image?: string;
 }
 
 function initials(name: string) {
@@ -27,11 +28,12 @@ export default function Artists() {
     fetch("/api/artists")
       .then((res) => res.json())
       .then((data) => {
-        setArtists(data);
+        setArtists(Array.isArray(data) ? data : []);
         setIsLoading(false);
       })
       .catch((err) => {
         console.error("Failed to fetch artists", err);
+        setArtists([]);
         setIsLoading(false);
       });
   }, []);
@@ -52,41 +54,59 @@ export default function Artists() {
           </p>
         </div>
 
-        <ul className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
-          {!isLoading && artists.map((artist, i) => (
-            <li key={artist.id} style={{ transitionDelay: `${(i % 4) * 60}ms` }} className="reveal">
-              <a
-                href="#contact"
-                data-cursor-label="View"
-                className="group relative flex aspect-[4/5] flex-col justify-between overflow-hidden bg-bg p-5 transition-colors hover:bg-bg-raise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold"
-              >
-                <span className="font-mono text-xs text-muted">
-                  {(i + 1).toString().padStart(2, "0")}
-                </span>
-
-                {/* Monogram */}
-                <span
-                  aria-hidden
-                  className="text-gold-grad pointer-events-none absolute inset-0 flex items-center justify-center font-display text-6xl font-extrabold opacity-15 transition-all duration-500 group-hover:scale-110 group-hover:opacity-30 sm:text-7xl"
+        {isLoading ? (
+          <div className="mt-16 text-center py-20">
+            <p className="text-ivory/60">Loading artists...</p>
+          </div>
+        ) : artists.length === 0 ? (
+          <div className="mt-16 text-center py-20">
+            <p className="text-ivory/60">No artists available</p>
+          </div>
+        ) : (
+          <ul className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
+            {artists.map((artist, i) => (
+              <li key={artist.id} style={{ transitionDelay: `${(i % 4) * 60}ms` }} className="reveal">
+                <a
+                  href="mailto:3point6@gongsoundentertainment.com"
+                  data-cursor-label="View"
+                  className="group relative flex aspect-[4/5] flex-col justify-between overflow-hidden bg-bg p-5 transition-colors hover:bg-bg-raise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold"
                 >
-                  {initials(artist.name)}
-                </span>
-
-                <div className="relative">
-                  <h3 className="font-display text-lg font-bold leading-tight text-ivory transition-colors group-hover:text-gold sm:text-xl">
-                    {artist.name}
-                  </h3>
-                  <span className="label mt-1 block !text-[0.55rem] text-muted">
-                    Artist
+                  <span className="font-mono text-xs text-muted">
+                    {(i + 1).toString().padStart(2, "0")}
                   </span>
-                </div>
 
-                {/* hover underline */}
-                <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
-              </a>
-            </li>
-          ))}
-        </ul>
+                  {/* Artist Image or Monogram */}
+                  {artist.image ? (
+                    <img
+                      src={artist.image}
+                      alt={artist.name}
+                      className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 transition-opacity duration-500 group-hover:opacity-30"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden
+                      className="text-gold-grad pointer-events-none absolute inset-0 flex items-center justify-center font-display text-6xl font-extrabold opacity-15 transition-all duration-500 group-hover:scale-110 group-hover:opacity-30 sm:text-7xl"
+                    >
+                      {initials(artist.name)}
+                    </span>
+                  )}
+
+                  <div className="relative">
+                    <h3 className="font-display text-lg font-bold leading-tight text-ivory transition-colors group-hover:text-gold sm:text-xl">
+                      {artist.name}
+                    </h3>
+                    <span className="label mt-1 block !text-[0.55rem] text-muted">
+                      Artist
+                    </span>
+                  </div>
+
+                  {/* hover underline */}
+                  <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

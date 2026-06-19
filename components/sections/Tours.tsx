@@ -22,16 +22,19 @@ export default function Tours() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/tours")
-      .then((res) => res.json())
-      .then((data) => {
-        setTours(data);
+    const fetchTours = async () => {
+      try {
+        const res = await fetch("/api/tours");
+        const data = await res.json();
+        console.log("Fetched tours:", data);
+        setTours(Array.isArray(data) ? data : []);
         setIsLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Failed to fetch tours", err);
         setIsLoading(false);
-      });
+      }
+    };
+    fetchTours();
   }, []);
 
   return (
@@ -50,7 +53,7 @@ export default function Tours() {
           <div className="mt-14 flex flex-col gap-4">
             {tours.map((t, i) => (
               <Link
-                key={i}
+                key={t.id}
                 href={`/tours/${titleToSlug(t.title)}`}
                 style={{ transitionDelay: `${i * 80}ms` }}
                 className="reveal group grid grid-cols-1 items-center gap-6 rounded-2xl border border-line bg-bg-raise/40 p-6 transition-colors hover:border-gold/40 sm:grid-cols-[auto_1fr_auto] sm:p-8"
@@ -96,7 +99,7 @@ export default function Tours() {
               the first to know when we announce our next stop.
             </p>
             <a
-              href="#contact"
+              href="mailto:3point6@gongsoundentertainment.com"
               className="reveal mt-8 inline-flex items-center gap-3 rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:border-gold hover:bg-gold hover:text-bg"
             >
               Get updates

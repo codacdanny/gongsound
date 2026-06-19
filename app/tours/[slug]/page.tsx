@@ -1,6 +1,7 @@
 "use client";
 
-import { use, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowLeft, MapPin, Calendar, Clock, Ticket } from "lucide-react";
 import Link from "next/link";
 import { useReveal } from "@/lib/anim";
@@ -19,14 +20,21 @@ interface Tour {
   updatedAt?: string;
 }
 
-export default function TourPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = use(params);
+export default function TourPage() {
   const ref = useReveal<HTMLDivElement>();
+  const [slug, setSlug] = useState("");
   const [tour, setTour] = useState<Tour | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const pathSlug = window.location.pathname.split("/").pop() || "";
+    setSlug(pathSlug);
+  }, []);
+
+  useEffect(() => {
+    if (!slug) return;
+
     const fetchTours = async () => {
       try {
         setLoading(true);
@@ -34,9 +42,10 @@ export default function TourPage({ params }: { params: Promise<{ slug: string }>
         if (!response.ok) {
           throw new Error("Failed to fetch tours");
         }
-        const tours: Tour[] = await response.json();
+        const data = await response.json();
+        const tours = Array.isArray(data) ? data : [];
         const foundTour = tours.find(
-          (t) => titleToSlug(t.title) === resolvedParams.slug
+          (t) => titleToSlug(t.title) === slug
         );
         setTour(foundTour || null);
       } catch (err) {
@@ -47,7 +56,7 @@ export default function TourPage({ params }: { params: Promise<{ slug: string }>
     };
 
     fetchTours();
-  }, [resolvedParams.slug]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -80,23 +89,24 @@ export default function TourPage({ params }: { params: Promise<{ slug: string }>
   }
 
   return (
-    <main ref={ref} className="min-h-screen bg-bg pt-32 pb-20 px-5 sm:px-8">
+    <main ref={ref} className="min-h-screen bg-bg pt-20 pb-20 px-5 sm:px-8">
       <div className="mx-auto max-w-4xl">
-        {/* Back button */}
-        <Link
-          href="/"
-          className="reveal inline-flex items-center gap-2 text-sm text-gold/70 transition-colors hover:text-gold mb-12"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden />
-          Back to home
-        </Link>
+        {/* Header with back button and date */}
+        <div className="reveal mb-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pb-8 border-b border-line">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-gold/70 transition-colors hover:text-gold"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            Back to home
+          </Link>
 
-        {/* Date badge */}
-        <div className="reveal mb-8 inline-flex items-center gap-3 rounded-full border border-gold/40 px-5 py-3">
-          <Calendar className="h-5 w-5 text-gold" aria-hidden />
-          <span className="text-base font-semibold text-gold">
-            {tour.month} {tour.day}, 2025
-          </span>
+          <div className="inline-flex items-center gap-3 rounded-full border border-gold/40 px-5 py-3 w-fit">
+            <Calendar className="h-5 w-5 text-gold shrink-0" aria-hidden />
+            <span className="text-base font-semibold text-gold">
+              {tour.month} {tour.day}, 2025
+            </span>
+          </div>
         </div>
 
         {/* Headline */}
@@ -153,7 +163,7 @@ export default function TourPage({ params }: { params: Promise<{ slug: string }>
               of culture, sound, and legacy.
             </p>
             <a
-              href="#contact"
+              href="mailto:3point6@gongsoundentertainment.com"
               className="flex items-center justify-center gap-2 w-full rounded-full bg-gold px-6 py-4 text-base font-semibold uppercase tracking-[0.14em] text-bg transition-transform hover:scale-105"
             >
               <Ticket className="h-5 w-5" aria-hidden />
@@ -223,7 +233,7 @@ export default function TourPage({ params }: { params: Promise<{ slug: string }>
             is here to help.
           </p>
           <a
-            href="#contact"
+            href="mailto:3point6@gongsoundentertainment.com"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-bg"
           >
             Contact us

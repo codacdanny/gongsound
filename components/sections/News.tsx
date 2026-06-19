@@ -21,16 +21,20 @@ export default function News() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/news")
-      .then((res) => res.json())
-      .then((data) => {
-        setArticles(data.slice(0, 3)); // Show latest 3
+    const fetchNews = async () => {
+      try {
+        const res = await fetch("/api/news");
+        const data = await res.json();
+        console.log("Fetched news:", data);
+        const articles = Array.isArray(data) ? data.slice(0, 3) : [];
+        setArticles(articles);
         setIsLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Failed to fetch news", err);
         setIsLoading(false);
-      });
+      }
+    };
+    fetchNews();
   }, []);
 
   return (

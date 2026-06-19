@@ -34,9 +34,10 @@ export default function NewsPage() {
           throw new Error("Failed to fetch news");
         }
         const data = await response.json();
-        setNews(data);
+        setNews(Array.isArray(data) ? data : []);
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
+        setNews([]);
       } finally {
         setLoading(false);
       }
@@ -120,7 +121,7 @@ export default function NewsPage() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {filteredNews.map((article, idx) => (
                 <article
-                  key={idx}
+                  key={article.id}
                   style={{ transitionDelay: `${(idx % 3) * 80}ms` }}
                   className="reveal group flex flex-col rounded-2xl border border-gold/30 bg-bg-raise/50 p-8 hover:border-gold/60 transition-colors"
                 >
@@ -186,7 +187,7 @@ export default function NewsPage() {
             to your inbox.
           </p>
           <a
-            href="#contact"
+            href="mailto:3point6@gongsoundentertainment.com"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-bg"
           >
             Get updates

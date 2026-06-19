@@ -6,7 +6,7 @@ export const SITE = {
   full: "Gongsound Entertainment",
   location: "Benin City, Edo State",
   country: "Nigeria",
-  email: "hello@gongsound.com",
+  email: "3point6@gongsoundentertainment.com",
   social: [
     { label: "Instagram", href: "#" },
     { label: "YouTube", href: "#" },
