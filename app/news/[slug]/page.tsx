@@ -15,6 +15,7 @@ interface NewsArticle {
   tag: string;
   date: string;
   author?: string;
+  image?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -120,6 +121,17 @@ export default function ArticlePage() {
         <p className="reveal text-xl text-ivory/70 leading-relaxed mb-12 max-w-2xl">
           {article.excerpt}
         </p>
+
+        {/* Feature Image */}
+        {article.image && (
+          <div className="reveal mb-12 rounded-2xl overflow-hidden">
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-96 object-cover"
+            />
+          </div>
+        )}
 
         {/* Divider */}
         <div className="reveal h-px bg-gradient-to-r from-gold/60 to-transparent mb-12" />

@@ -85,7 +85,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 pb-24 pt-28 sm:px-8"
+      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 pb-16 pt-24 sm:pb-24 sm:pt-28 sm:px-8"
     >
       {/* Ambient gold glow */}
       <div
@@ -135,7 +135,7 @@ export default function Hero() {
               animate={v}
               variants={{ hide: { y: "110%" }, show: { y: 0 } }}
               transition={{ duration: 1, ease, delay: 0.05 }}
-              className="block text-[18vw] leading-[0.86] sm:text-[15vw] lg:text-[12vw]"
+              className="block text-[clamp(2.5rem,18vw,15rem)] leading-[0.86] sm:text-[clamp(3rem,15vw,15rem)] lg:text-[clamp(3.5rem,12vw,15rem)]"
             >
               {HERO.line1}
             </motion.span>
@@ -146,7 +146,7 @@ export default function Hero() {
               animate={v}
               variants={{ hide: { y: "110%" }, show: { y: 0 } }}
               transition={{ duration: 1, ease, delay: 0.16 }}
-              className="block text-gold-sheen text-[18vw] leading-[0.86] sm:text-[15vw] lg:text-[12vw]"
+              className="block text-gold-sheen text-[clamp(2.5rem,18vw,15rem)] leading-[0.86] sm:text-[clamp(3rem,15vw,15rem)] lg:text-[clamp(3.5rem,12vw,15rem)]"
             >
               {HERO.line2}.
             </motion.span>

@@ -13,6 +13,7 @@ interface NewsArticle {
   tag: string;
   date: string;
   author?: string;
+  image?: string;
 }
 
 export default function NewsAdminPage() {
@@ -27,6 +28,7 @@ export default function NewsAdminPage() {
     tag: "",
     date: "",
     author: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -68,6 +70,7 @@ export default function NewsAdminPage() {
           tag: "",
           date: "",
           author: "",
+          image: "",
         });
         setEditingId(null);
         setShowForm(false);
@@ -102,6 +105,7 @@ export default function NewsAdminPage() {
       tag: article.tag,
       date: article.date,
       author: article.author || "",
+      image: article.image || "",
     });
     setEditingId(article.id);
     setShowForm(true);
@@ -111,15 +115,15 @@ export default function NewsAdminPage() {
     <main className="min-h-screen bg-bg pt-8 pb-20 px-5 sm:px-8">
       <div className="mx-auto max-w-[1200px]">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-12">
           <Link
             href="/admin/dashboard"
-            className="inline-flex items-center gap-2 text-sm text-gold/70 hover:text-gold"
+            className="inline-flex items-center gap-2 text-sm text-gold/70 hover:text-gold self-start sm:self-auto"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
             Back
           </Link>
-          <h1 className="display text-3xl text-ivory">News & Articles</h1>
+          <h1 className="display text-3xl sm:text-3xl text-ivory">News & Articles</h1>
         </div>
 
         {/* Add button */}
@@ -136,7 +140,7 @@ export default function NewsAdminPage() {
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="mb-12 rounded-2xl border border-gold/30 bg-bg-raise/50 p-8 space-y-6"
+            className="mb-12 rounded-2xl border border-gold/30 bg-bg-raise/50 p-6 sm:p-8 space-y-6"
           >
             <h3 className="text-xl font-bold text-ivory">
               {editingId ? "Edit Article" : "New Article"}
@@ -177,6 +181,15 @@ export default function NewsAdminPage() {
                 }
                 className="rounded-lg border border-gold/30 bg-bg/50 px-4 py-3 text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-gold/60"
               />
+              <input
+                type="text"
+                placeholder="Image URL (e.g., /images/article.jpg)"
+                value={formData.image}
+                onChange={(e) =>
+                  setFormData({ ...formData, image: e.target.value })
+                }
+                className="rounded-lg border border-gold/30 bg-bg/50 px-4 py-3 text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-gold/60 md:col-span-2"
+              />
             </div>
 
             <textarea
@@ -216,6 +229,7 @@ export default function NewsAdminPage() {
                     tag: "",
                     date: "",
                     author: "",
+                    image: "",
                   });
                 }}
                 className="rounded-lg border border-gold/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-gold"
@@ -236,32 +250,30 @@ export default function NewsAdminPage() {
             articles.map((article) => (
               <div
                 key={article.id}
-                className="rounded-lg border border-gold/30 bg-bg-raise/50 p-6"
+                className="rounded-lg border border-gold/30 bg-bg-raise/50 p-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-0"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex-1">
-                    <h3 className="font-bold text-ivory">{article.title}</h3>
-                    <p className="text-sm text-ivory/60 mt-1">
-                      {article.tag} • {article.date}
-                      {article.author && ` • By ${article.author}`}
-                    </p>
-                    <p className="text-sm text-ivory/50 mt-2 line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                  </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-ivory text-sm sm:text-base">{article.title}</h3>
+                  <p className="text-xs sm:text-sm text-ivory/60 mt-1">
+                    {article.tag} • {article.date}
+                    {article.author && ` • By ${article.author}`}
+                  </p>
+                  <p className="text-xs sm:text-sm text-ivory/50 mt-2 line-clamp-2">
+                    {article.excerpt}
+                  </p>
                 </div>
-                <div className="flex gap-2 mt-4">
+                <div className="flex gap-2 w-full sm:w-auto">
                   <button
                     onClick={() => handleEdit(article)}
-                    className="p-2 rounded-lg border border-gold/50 text-gold hover:bg-gold/10"
+                    className="flex-1 sm:flex-none p-2.5 sm:p-2 rounded-lg border border-gold/50 text-gold hover:bg-gold/10 transition-colors"
                   >
-                    <Edit2 className="h-4 w-4" aria-hidden />
+                    <Edit2 className="h-4 w-4 mx-auto sm:mx-0" aria-hidden />
                   </button>
                   <button
                     onClick={() => handleDelete(article.id)}
-                    className="p-2 rounded-lg border border-red-500/50 text-red-500 hover:bg-red-500/10"
+                    className="flex-1 sm:flex-none p-2.5 sm:p-2 rounded-lg border border-red-500/50 text-red-500 hover:bg-red-500/10 transition-colors"
                   >
-                    <Trash2 className="h-4 w-4" aria-hidden />
+                    <Trash2 className="h-4 w-4 mx-auto sm:mx-0" aria-hidden />
                   </button>
                 </div>
               </div>

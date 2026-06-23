@@ -13,6 +13,7 @@ interface NewsArticle {
   excerpt: string;
   tag: string;
   date: string;
+  image?: string;
 }
 
 export default function News() {
@@ -42,7 +43,7 @@ export default function News() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <SectionHeading index="06" kicker="News & updates" />
+            <SectionHeading index="02" kicker="News & updates" />
             <h2 className="reveal display mt-6 max-w-2xl text-4xl text-ivory sm:text-5xl lg:text-6xl">
               Stories from the <span className="font-serif italic text-gold">culture.</span>
             </h2>
@@ -62,26 +63,38 @@ export default function News() {
               href={`/news/${titleToSlug(n.title)}`}
               data-cursor-label="Read"
               style={{ transitionDelay: `${i * 80}ms` }}
-              className="reveal group flex flex-col rounded-2xl border border-line bg-bg-raise/40 p-7 transition-colors hover:border-gold/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="reveal group flex flex-col rounded-2xl border border-line bg-bg-raise/40 overflow-hidden transition-colors hover:border-gold/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
-              <div className="flex items-center justify-between">
-                <span className="rounded-full border border-gold/40 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-gold">
-                  {n.tag}
+              {n.image && (
+                <div className="relative h-40 w-full overflow-hidden bg-bg">
+                  <img
+                    src={n.image}
+                    alt={n.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+              )}
+
+              <div className="flex flex-col p-7">
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full border border-gold/40 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-gold">
+                    {n.tag}
+                  </span>
+                  <span className="font-mono text-xs text-muted">{n.date}</span>
+                </div>
+
+                <h3 className="mt-6 font-display text-xl font-bold leading-snug text-ivory transition-colors group-hover:text-gold">
+                  {n.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-ivory/60">
+                  {n.excerpt}
+                </p>
+
+                <span className="mt-6 inline-flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold">
+                  Read story
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
                 </span>
-                <span className="font-mono text-xs text-muted">{n.date}</span>
               </div>
-
-              <h3 className="mt-6 font-display text-xl font-bold leading-snug text-ivory transition-colors group-hover:text-gold">
-                {n.title}
-              </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-ivory/60">
-                {n.excerpt}
-              </p>
-
-              <span className="mt-6 inline-flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold">
-                Read story
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-              </span>
             </Link>
           ))}
         </div>

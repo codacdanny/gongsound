@@ -65,7 +65,7 @@ export default function LoginPage() {
               type="email"
               name="email"
               required
-              className="w-full rounded-lg border border-gold/30 bg-bg/50 px-4 py-3 text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-gold/60"
+              className="w-full rounded-lg border border-gold/30 bg-bg/50 px-4 py-3.5 text-ivory placeholder:text-ivory/40 focus:outline-none focus:border-gold/60"
               placeholder="admin@gongsound.com"
             />
           </div>
@@ -99,7 +99,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full rounded-lg bg-gold px-6 py-3 text-base font-semibold uppercase tracking-[0.14em] text-bg transition-opacity disabled:opacity-50"
+            className="w-full rounded-lg bg-gold px-6 py-3.5 text-base font-semibold uppercase tracking-[0.14em] text-bg transition-opacity disabled:opacity-50"
           >
             {isLoading ? "Signing in..." : "Sign In"}
           </button>

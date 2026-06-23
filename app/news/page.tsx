@@ -14,6 +14,7 @@ interface NewsArticle {
   tag: string;
   date: string;
   author?: string;
+  image?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -53,7 +54,7 @@ export default function NewsPage() {
     <main ref={ref} className="min-h-screen bg-bg pt-32 pb-20 px-5 sm:px-8">
       <div className="mx-auto max-w-[1400px]">
         {/* Header */}
-        <div className="mb-16 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-16 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <Link
             href="#"
             scroll={false}
@@ -91,7 +92,7 @@ export default function NewsPage() {
         <div className="reveal mb-12 flex flex-wrap gap-3">
           <button
             onClick={() => setSelectedTag(null)}
-            className={`rounded-full px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] transition-all ${
+            className={`rounded-full px-5 py-3 sm:py-2.5 text-sm font-semibold uppercase tracking-[0.14em] transition-all ${
               selectedTag === null
                 ? "bg-gold text-bg"
                 : "border border-gold/40 text-gold hover:border-gold hover:bg-gold/10"
@@ -103,7 +104,7 @@ export default function NewsPage() {
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] transition-all ${
+              className={`rounded-full px-5 py-3 sm:py-2.5 text-sm font-semibold uppercase tracking-[0.14em] transition-all ${
                 selectedTag === tag
                   ? "bg-gold text-bg"
                   : "border border-gold/40 text-gold hover:border-gold hover:bg-gold/10"
@@ -123,44 +124,57 @@ export default function NewsPage() {
                 <article
                   key={article.id}
                   style={{ transitionDelay: `${(idx % 3) * 80}ms` }}
-                  className="reveal group flex flex-col rounded-2xl border border-gold/30 bg-bg-raise/50 p-8 hover:border-gold/60 transition-colors"
+                  className="reveal group flex flex-col rounded-2xl border border-gold/30 bg-bg-raise/50 overflow-hidden hover:border-gold/60 transition-colors"
                 >
-                  {/* Meta */}
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="rounded-full border border-gold/40 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-gold">
-                      {article.tag}
-                    </span>
-                    <span className="flex items-center gap-1 text-xs text-muted">
-                      <Calendar className="h-3 w-3" aria-hidden />
-                      {article.date}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h2 className="display text-xl font-bold text-ivory mb-3 line-clamp-3 flex-1">
-                    {article.title}
-                  </h2>
-
-                  {/* Excerpt */}
-                  <p className="text-sm leading-relaxed text-ivory/60 mb-5 line-clamp-3">
-                    {article.excerpt}
-                  </p>
-
-                  {/* Author */}
-                  {article.author && (
-                    <p className="text-xs text-muted/70 mb-5 border-t border-line pt-4">
-                      By {article.author}
-                    </p>
+                  {/* Image */}
+                  {article.image && (
+                    <div className="relative h-40 w-full overflow-hidden bg-bg">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
                   )}
 
-                  {/* CTA */}
-                  <Link
-                    href={`/news/${titleToSlug(article.title)}`}
-                    className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all group-hover:translate-x-1"
-                  >
-                    Read story
-                    <ArrowRight className="h-4 w-4" aria-hidden />
-                  </Link>
+                  <div className="flex flex-col p-8">
+                    {/* Meta */}
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="rounded-full border border-gold/40 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-gold">
+                        {article.tag}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs text-muted">
+                        <Calendar className="h-3 w-3" aria-hidden />
+                        {article.date}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h2 className="display text-xl font-bold text-ivory mb-3 line-clamp-3 flex-1">
+                      {article.title}
+                    </h2>
+
+                    {/* Excerpt */}
+                    <p className="text-sm leading-relaxed text-ivory/60 mb-5 line-clamp-3">
+                      {article.excerpt}
+                    </p>
+
+                    {/* Author */}
+                    {article.author && (
+                      <p className="text-xs text-muted/70 mb-5 border-t border-line pt-4">
+                        By {article.author}
+                      </p>
+                    )}
+
+                    {/* CTA */}
+                    <Link
+                      href={`/news/${titleToSlug(article.title)}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-gold transition-all hover:bg-gold hover:text-bg"
+                    >
+                      Read story
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
+                  </div>
                 </article>
               ))}
             </div>

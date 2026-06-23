@@ -47,7 +47,7 @@ export const ABOUT = {
     "We discover raw talent and develop it with intention — pairing timeless songwriting with world-class production so that the music we release outlives the moment it was made in.",
     "From the studio to the stage, every release and every show is engineered to celebrate who we are. This is not just entertainment. It is identity, sound, and legacy moving as one.",
   ],
-  ceoName: "Vincent Agbonilahor",
+  ceoName: "Vincent Agbonlahor",
   ceoRole: "Chief Executive Officer (CEO)",
   ceoQuote:
     "We are not chasing trends. We are building a legacy that begins at home and travels far.",
@@ -111,7 +111,7 @@ export const ALBUM = {
   title: "Legendary",
   subtitle: "The debut album",
   blurb:
-    "Twelve voices, one movement. Legendary is the sound of Benin City taking its place on the world stage — produced, performed and released with intention.",
+    "Ten voices, one movement. Legendary is the sound of Benin City taking its place on the world stage — produced, performed and released with intention.",
   cta: "Stream / Pre-save",
   featuring: ARTISTS,
 } as const;
@@ -199,7 +199,7 @@ export const NEWS: ReadonlyArray<{
     date: "Jul 2025",
     title: "Meet the roster: Gongsound's debut artists",
     excerpt:
-      "Twelve artists, one movement. Get to know the voices behind Legendary.",
+      " Ten artists, one movement. Get to know the voices behind Legendary.",
     body: "Each artist on the Gongsound roster brings a distinct voice and vision. From Akobe's lyrical precision to Alaska Agho's genre-bending approach, we celebrate the diversity and depth of our family. These are not just musicians — they are storytellers, innovators, and keepers of culture.",
     author: "Artist Spotlight",
   },

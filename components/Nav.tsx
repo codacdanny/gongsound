@@ -37,6 +37,7 @@ function Wordmark({ onClick }: { onClick?: () => void }) {
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [hasArtists, setHasArtists] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -48,6 +49,23 @@ export default function Nav() {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
+
+  // Check if there are any artists
+  useEffect(() => {
+    const checkArtists = async () => {
+      try {
+        const res = await fetch("/api/artists");
+        if (res.ok) {
+          const data = await res.json();
+          setHasArtists(Array.isArray(data) && data.length > 0);
+        }
+      } catch (err) {
+        console.error("Failed to check artists:", err);
+      }
+    };
+
+    checkArtists();
+  }, []);
 
   return (
     <>
@@ -62,7 +80,13 @@ export default function Nav() {
           <Wordmark />
 
           <ul className="hidden items-center gap-7 lg:flex">
-            {NAV.map((item) => (
+            {NAV.filter((item) => {
+              // Hide artists link if no artists available
+              if (item.id === "artists" && !hasArtists) {
+                return false;
+              }
+              return true;
+            }).map((item) => (
               <li key={item.id}>
                 <a
                   href={(item as any).href || `#${item.id}`}
@@ -109,7 +133,13 @@ export default function Nav() {
             </div>
 
             <ul className="flex flex-1 flex-col justify-center gap-1 px-6">
-              {NAV.map((item, i) => (
+              {NAV.filter((item) => {
+                // Hide artists link if no artists available
+                if (item.id === "artists" && !hasArtists) {
+                  return false;
+                }
+                return true;
+              }).map((item, i) => (
                 <motion.li
                   key={item.id}
                   initial={{ opacity: 0, x: -24 }}

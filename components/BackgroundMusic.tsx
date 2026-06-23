@@ -6,14 +6,38 @@ import { Volume2, VolumeX } from "lucide-react";
 /**
  * Background ambient music player. Plays automatically (unmuted) on page load.
  * User can mute/unmute with the button in the corner.
+ * Music URL is fetched from admin settings.
  */
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isMuted, setIsMuted] = useState(false);
+  const [musicUrl, setMusicUrl] = useState<string | null>(null);
+
+  // Fetch music URL from settings
+  useEffect(() => {
+    const fetchMusicUrl = async () => {
+      try {
+        const res = await fetch("/api/settings", {
+          cache: "no-store",
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setMusicUrl(data.backgroundMusicUrl);
+        }
+      } catch (err) {
+        console.error("Failed to fetch settings:", err);
+        setMusicUrl("/ambient.mp3"); // Fallback to default
+      }
+    };
+
+    fetchMusicUrl();
+  }, []);
 
   useEffect(() => {
-    // Create and setup audio element
-    const audio = new Audio("/ambient.mp3");
+    if (!musicUrl) return;
+
+    // Create and setup audio element with fetched URL
+    const audio = new Audio(musicUrl);
     audio.loop = true;
     audio.volume = 0.25; // 25% volume, soothing level
     audioRef.current = audio;
@@ -32,7 +56,7 @@ export default function BackgroundMusic() {
       audio.pause();
       audio.currentTime = 0;
     };
-  }, []);
+  }, [musicUrl]);
 
   const toggleMute = () => {
     if (!audioRef.current) return;

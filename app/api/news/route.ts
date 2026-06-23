@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
         tag: body.tag,
         date: body.date,
         author: body.author,
+        image: body.image,
       },
     });
     return NextResponse.json(article, { status: 201 });

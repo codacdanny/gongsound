@@ -25,6 +25,7 @@ export async function PUT(
         tag: body.tag,
         date: body.date,
         author: body.author,
+        image: body.image,
       },
     });
     return NextResponse.json(article);

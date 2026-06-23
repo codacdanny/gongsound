@@ -74,7 +74,7 @@ export default function About() {
                 className="reveal bg-bg p-5"
                 style={{ transitionDelay: `${i * 70}ms` }}
               >
-                <dt className="text-gold-grad font-display text-3xl font-extrabold">
+                <dt className="text-gold-grad font-display text-2xl sm:text-3xl font-extrabold">
                   {s.value}
                 </dt>
                 <dd className="mt-2 text-[0.7rem] uppercase tracking-[0.12em] text-muted">

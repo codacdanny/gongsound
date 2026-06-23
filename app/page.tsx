@@ -24,11 +24,11 @@ export default function Home() {
         <main>
           <Hero />
           <About />
+          <News />
           <Services />
           <Artists />
           <Album />
           <Tours />
-          <News />
           <Contact />
         </main>
         <Footer />

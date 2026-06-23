@@ -38,18 +38,23 @@ export default function Artists() {
       });
   }, []);
 
+  // Don't render section if no artists available
+  if (!isLoading && artists.length === 0) {
+    return null;
+  }
+
   return (
     <section id="artists" ref={ref} className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <SectionHeading index="03" kicker="The roster" />
+            <SectionHeading index="04" kicker="The roster" />
             <h2 className="reveal display mt-6 max-w-2xl text-4xl text-ivory sm:text-5xl lg:text-6xl">
               The voices of the <span className="font-serif italic text-gold">movement.</span>
             </h2>
           </div>
           <p className="reveal max-w-xs text-sm leading-relaxed text-ivory/60">
-            Twelve artists. One sound rooted in culture, built to travel beyond
+            ten artists. One sound rooted in culture, built to travel beyond
             home.
           </p>
         </div>
@@ -57,10 +62,6 @@ export default function Artists() {
         {isLoading ? (
           <div className="mt-16 text-center py-20">
             <p className="text-ivory/60">Loading artists...</p>
-          </div>
-        ) : artists.length === 0 ? (
-          <div className="mt-16 text-center py-20">
-            <p className="text-ivory/60">No artists available</p>
           </div>
         ) : (
           <ul className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
@@ -85,7 +86,7 @@ export default function Artists() {
                   ) : (
                     <span
                       aria-hidden
-                      className="text-gold-grad pointer-events-none absolute inset-0 flex items-center justify-center font-display text-6xl font-extrabold opacity-15 transition-all duration-500 group-hover:scale-110 group-hover:opacity-30 sm:text-7xl"
+                      className="text-gold-grad pointer-events-none absolute inset-0 flex items-center justify-center font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold opacity-15 transition-all duration-500 group-hover:scale-110 group-hover:opacity-30"
                     >
                       {initials(artist.name)}
                     </span>

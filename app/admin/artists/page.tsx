@@ -103,15 +103,15 @@ export default function ArtistsAdminPage() {
     <main className="min-h-screen bg-bg pt-8 pb-20 px-5 sm:px-8">
       <div className="mx-auto max-w-[1200px]">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-12">
           <Link
             href="/admin/dashboard"
-            className="inline-flex items-center gap-2 text-sm text-gold/70 hover:text-gold"
+            className="inline-flex items-center gap-2 text-sm text-gold/70 hover:text-gold self-start sm:self-auto"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
             Back
           </Link>
-          <h1 className="display text-3xl text-ivory">Artists Roster</h1>
+          <h1 className="display text-3xl sm:text-3xl text-ivory">Artists Roster</h1>
         </div>
 
         {/* Add button */}
@@ -128,7 +128,7 @@ export default function ArtistsAdminPage() {
         {showForm && (
           <form
             onSubmit={handleSubmit}
-            className="mb-12 rounded-2xl border border-gold/30 bg-bg-raise/50 p-8 space-y-6"
+            className="mb-12 rounded-2xl border border-gold/30 bg-bg-raise/50 p-6 sm:p-8 space-y-6"
           >
             <h3 className="text-xl font-bold text-ivory">
               {editingId ? "Edit Artist" : "New Artist"}
@@ -209,31 +209,31 @@ export default function ArtistsAdminPage() {
             artists.map((artist) => (
               <div
                 key={artist.id}
-                className="rounded-lg border border-gold/30 bg-bg-raise/50 p-6 flex items-center justify-between"
+                className="rounded-lg border border-gold/30 bg-bg-raise/50 p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0"
               >
-                <div>
-                  <h3 className="font-bold text-ivory">{artist.name}</h3>
+                <div className="flex-1">
+                  <h3 className="font-bold text-ivory text-sm sm:text-base">{artist.name}</h3>
                   {artist.role && (
-                    <p className="text-sm text-gold">{artist.role}</p>
+                    <p className="text-xs sm:text-sm text-gold">{artist.role}</p>
                   )}
                   {artist.bio && (
-                    <p className="text-sm text-ivory/60 line-clamp-2 mt-2">
+                    <p className="text-xs sm:text-sm text-ivory/60 line-clamp-2 mt-2">
                       {artist.bio}
                     </p>
                   )}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-full sm:w-auto">
                   <button
                     onClick={() => handleEdit(artist)}
-                    className="p-2 rounded-lg border border-gold/50 text-gold hover:bg-gold/10"
+                    className="flex-1 sm:flex-none p-2.5 sm:p-2 rounded-lg border border-gold/50 text-gold hover:bg-gold/10 transition-colors"
                   >
-                    <Edit2 className="h-4 w-4" aria-hidden />
+                    <Edit2 className="h-4 w-4 mx-auto sm:mx-0" aria-hidden />
                   </button>
                   <button
                     onClick={() => handleDelete(artist.id)}
-                    className="p-2 rounded-lg border border-red-500/50 text-red-500 hover:bg-red-500/10"
+                    className="flex-1 sm:flex-none p-2.5 sm:p-2 rounded-lg border border-red-500/50 text-red-500 hover:bg-red-500/10 transition-colors"
                   >
-                    <Trash2 className="h-4 w-4" aria-hidden />
+                    <Trash2 className="h-4 w-4 mx-auto sm:mx-0" aria-hidden />
                   </button>
                 </div>
               </div>
