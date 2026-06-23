@@ -46,40 +46,40 @@ export default function Contact() {
 
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         {/* Hero-scale headline */}
-        <div className="mb-20 text-center">
-          <div className="reveal inline-block mb-6">
-            <span className="label text-gold">Let's build something</span>
+        <div className="mb-12 sm:mb-16 lg:mb-20 text-center px-2">
+          <div className="reveal inline-block mb-4 sm:mb-6">
+            <span className="label text-gold text-xs sm:text-sm">Let's build something</span>
           </div>
-          <h2 className="reveal display text-6xl sm:text-7xl lg:text-8xl text-balance leading-[0.9]">
+          <h2 className="reveal display text-3xl sm:text-5xl lg:text-7xl xl:text-8xl text-balance leading-[0.9]">
             <span className="text-gold-sheen">Legendary.</span>
           </h2>
-          <p className="reveal mt-8 mx-auto max-w-2xl text-lg sm:text-xl leading-relaxed text-ivory/70">
+          <p className="reveal mt-6 sm:mt-8 mx-auto max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-ivory/70">
             {CONTACT.body}
           </p>
         </div>
 
         {/* Soundwave accent */}
-        <div className="reveal mx-auto mb-20 h-16 max-w-3xl sm:h-20">
+        <div className="reveal mx-auto mb-12 sm:mb-16 lg:mb-20 h-12 sm:h-16 lg:h-20 max-w-3xl">
           <SoundWave bars={96} />
         </div>
 
         {/* Form + contact info grid */}
-        <div className="grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
           {/* Form */}
-          <div className="reveal rounded-2xl border border-gold/40 bg-gradient-to-b from-bg-raise/60 to-bg/40 p-8 backdrop-blur-xl sm:p-12">
+          <div className="reveal rounded-2xl border border-gold/40 bg-gradient-to-b from-bg-raise/60 to-bg/40 p-6 sm:p-8 lg:p-12 backdrop-blur-xl">
             {status === "done" ? (
-              <div className="flex h-full min-h-[32rem] flex-col items-center justify-center text-center">
-                <span className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gold text-bg">
-                  <Check className="h-10 w-10" aria-hidden />
+              <div className="flex h-full min-h-[24rem] sm:min-h-[32rem] flex-col items-center justify-center text-center">
+                <span className="mb-4 sm:mb-5 flex h-16 sm:h-20 w-16 sm:w-20 items-center justify-center rounded-full bg-gold text-bg">
+                  <Check className="h-8 sm:h-10 w-8 sm:w-10" aria-hidden />
                 </span>
-                <h3 className="display text-4xl text-ivory">Message sent.</h3>
-                <p className="mt-4 max-w-xs text-base text-ivory/60">
+                <h3 className="display text-2xl sm:text-4xl text-ivory">Message sent.</h3>
+                <p className="mt-3 sm:mt-4 max-w-xs text-sm sm:text-base text-ivory/60">
                   Thank you — we'll be in touch soon. The journey begins at home,
                   but it never stays there.
                 </p>
               </div>
             ) : (
-              <form onSubmit={onSubmit} noValidate className="flex flex-col gap-6">
+              <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5 sm:gap-6">
                 <Field
                   label="Your name"
                   name="name"
@@ -97,7 +97,7 @@ export default function Contact() {
                   error={errors.email}
                 />
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5 sm:gap-2">
                   <label htmlFor="role" className="label text-muted">
                     I am a
                   </label>
@@ -105,7 +105,7 @@ export default function Contact() {
                     id="role"
                     name="role"
                     defaultValue="Artist"
-                    className="rounded-lg border border-line bg-bg px-4 py-3.5 text-base text-ivory outline-none transition-colors focus:border-gold focus-visible:ring-2 focus-visible:ring-gold/40"
+                    className="rounded-lg border border-line bg-bg px-4 py-3 sm:py-3.5 text-base text-ivory outline-none transition-colors focus:border-gold focus-visible:ring-2 focus-visible:ring-gold/40"
                   >
                     <option>Artist</option>
                     <option>Partner / Brand</option>
@@ -114,17 +114,17 @@ export default function Contact() {
                   </select>
                 </div>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5 sm:gap-2">
                   <label htmlFor="message" className="label text-muted">
                     Tell us your sound
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={5}
+                    rows={4}
                     placeholder="What's on your mind? Ideas, questions, collaboration proposals — we're listening."
                     aria-invalid={!!errors.message}
-                    className={`resize-none rounded-lg border bg-bg px-4 py-3.5 text-base text-ivory outline-none transition-colors placeholder:text-muted/50 focus:border-gold focus-visible:ring-2 focus-visible:ring-gold/40 ${
+                    className={`resize-none rounded-lg border bg-bg px-4 py-3 sm:py-3.5 text-base text-ivory outline-none transition-colors placeholder:text-muted/50 focus:border-gold focus-visible:ring-2 focus-visible:ring-gold/40 ${
                       errors.message ? "border-red-400/70" : "border-line"
                     }`}
                   />
@@ -136,7 +136,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="group mt-4 inline-flex items-center justify-center gap-3 rounded-full bg-gold px-8 py-4.5 text-base font-semibold uppercase tracking-[0.16em] text-bg transition-transform hover:scale-[1.05] disabled:scale-100 disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                  className="group mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-gold px-6 sm:px-8 py-3.5 sm:py-4.5 text-sm sm:text-base font-semibold uppercase tracking-[0.16em] text-bg transition-transform hover:scale-[1.05] disabled:scale-100 disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                 >
                   {status === "submitting" ? (
                     <>
@@ -156,34 +156,34 @@ export default function Contact() {
 
           {/* Contact info + location */}
           <div className="flex flex-col justify-center">
-            <div className="reveal rounded-2xl border border-gold/30 bg-bg-raise/50 p-8 backdrop-blur-sm">
-              <p className="label mb-4 text-gold">Reach us</p>
+            <div className="reveal rounded-2xl border border-gold/30 bg-bg-raise/50 p-6 sm:p-8 backdrop-blur-sm overflow-hidden">
+              <p className="label mb-2 sm:mb-4 text-gold text-xs sm:text-sm">Reach us</p>
               <a
                 href={`mailto:${SITE.email}`}
-                className="reveal link-sweep block font-display text-3xl font-bold text-gold sm:text-4xl"
+                className="reveal link-sweep block font-display text-base sm:text-xl lg:text-2xl font-bold text-gold leading-snug break-all"
               >
                 {SITE.email}
               </a>
 
-              <div className="reveal mt-8 space-y-6 border-t border-line pt-8">
+              <div className="reveal mt-6 sm:mt-8 space-y-4 sm:space-y-6 border-t border-line pt-6 sm:pt-8">
                 <div>
-                  <p className="label mb-2 text-muted">Location</p>
-                  <p className="text-lg font-medium text-ivory">
+                  <p className="label mb-1 sm:mb-2 text-muted">Location</p>
+                  <p className="text-base sm:text-lg font-medium text-ivory">
                     {SITE.location}
                   </p>
-                  <p className="font-serif text-sm italic text-gold">
+                  <p className="font-serif text-xs sm:text-sm italic text-gold mt-1">
                     {SITE.country}
                   </p>
                 </div>
 
                 <div>
-                  <p className="label mb-3 text-muted">Follow</p>
+                  <p className="label mb-2 sm:mb-3 text-muted text-xs sm:text-sm">Follow</p>
                   <ul className="flex flex-wrap gap-2">
                     {SITE.social.map((s) => (
                       <li key={s.label}>
                         <a
                           href={s.href}
-                          className="rounded-full border border-gold/40 px-4 py-2 text-sm text-gold transition-all hover:border-gold hover:bg-gold/10"
+                          className="rounded-full border border-gold/40 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gold transition-all hover:border-gold hover:bg-gold/10 whitespace-nowrap"
                         >
                           {s.label}
                         </a>
@@ -216,7 +216,7 @@ function Field({
   error?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1.5 sm:gap-2">
       <label htmlFor={name} className="label text-muted">
         {label}
       </label>
@@ -227,11 +227,11 @@ function Field({
         autoComplete={autoComplete}
         placeholder={placeholder}
         aria-invalid={!!error}
-        className={`rounded-lg border bg-bg px-4 py-3.5 text-base text-ivory outline-none transition-colors placeholder:text-muted/50 focus:border-gold focus-visible:ring-2 focus-visible:ring-gold/40 ${
+        className={`rounded-lg border bg-bg px-4 py-3 sm:py-3.5 text-base text-ivory outline-none transition-colors placeholder:text-muted/50 focus:border-gold focus-visible:ring-2 focus-visible:ring-gold/40 ${
           error ? "border-red-400/70" : "border-line"
         }`}
       />
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-xs sm:text-sm text-red-400">{error}</p>}
     </div>
   );
 }

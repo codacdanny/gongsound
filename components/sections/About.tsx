@@ -19,7 +19,7 @@ export default function About() {
 
       <div className="mx-auto mt-20 grid max-w-[1400px] gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         {/* CEO portrait */}
-        <div className="reveal relative">
+        <div className="reveal relative flex flex-col gap-6 sm:gap-0">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
             <Image
               src="/brand/ceo.jpg"
@@ -38,7 +38,7 @@ export default function About() {
           </div>
 
           {/* Floating quote card */}
-          <div className="reveal absolute -right-3 -bottom-8 max-w-[16rem] rounded-xl border border-gold/30 bg-bg-raise/90 p-5 backdrop-blur-md sm:-right-8 sm:-bottom-12">
+          <div className="reveal relative sm:absolute max-w-[16rem] rounded-xl border border-gold/30 bg-bg-raise/90 p-5 backdrop-blur-md sm:-right-8 sm:-bottom-12">
             <Quote className="mb-2 h-5 w-5 text-gold" aria-hidden />
             <p className="font-serif text-sm italic leading-relaxed text-ivory/90">
               {ABOUT.ceoQuote}

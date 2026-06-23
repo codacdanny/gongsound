@@ -135,7 +135,7 @@ export default function Hero() {
               animate={v}
               variants={{ hide: { y: "110%" }, show: { y: 0 } }}
               transition={{ duration: 1, ease, delay: 0.05 }}
-              className="block text-[clamp(2.5rem,18vw,15rem)] leading-[0.86] sm:text-[clamp(3rem,15vw,15rem)] lg:text-[clamp(3.5rem,12vw,15rem)]"
+              className="block text-[clamp(2rem,14vw,15rem)] leading-[0.86] sm:text-[clamp(2.5rem,13vw,15rem)] md:text-[clamp(3rem,15vw,15rem)] lg:text-[clamp(3.5rem,12vw,15rem)]"
             >
               {HERO.line1}
             </motion.span>
@@ -146,7 +146,7 @@ export default function Hero() {
               animate={v}
               variants={{ hide: { y: "110%" }, show: { y: 0 } }}
               transition={{ duration: 1, ease, delay: 0.16 }}
-              className="block text-gold-sheen text-[clamp(2.5rem,18vw,15rem)] leading-[0.86] sm:text-[clamp(3rem,15vw,15rem)] lg:text-[clamp(3.5rem,12vw,15rem)]"
+              className="block text-gold-sheen text-[clamp(2rem,14vw,15rem)] leading-[0.86] sm:text-[clamp(2.5rem,13vw,15rem)] md:text-[clamp(3rem,15vw,15rem)] lg:text-[clamp(3.5rem,12vw,15rem)]"
             >
               {HERO.line2}.
             </motion.span>
