@@ -11,13 +11,13 @@ export default function About() {
   const ref = useReveal<HTMLDivElement>();
 
   return (
-    <section id="about" ref={ref} className="relative py-24 sm:py-32">
+    <section id="about" ref={ref} className="relative py-16 sm:py-24 md:py-32">
       {/* Pillars marquee divider */}
-      <div className="border-y border-line py-5">
+      <div className="border-y border-line py-3 sm:py-5">
         <Marquee items={[...PILLARS_WORDS]} duration={26} />
       </div>
 
-      <div className="mx-auto mt-20 grid max-w-[1400px] gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div className="mx-auto mt-12 sm:mt-16 lg:mt-20 grid max-w-[1400px] gap-8 sm:gap-12 px-4 sm:px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         {/* CEO portrait */}
         <div className="reveal relative flex flex-col gap-6 sm:gap-0">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
@@ -50,15 +50,15 @@ export default function About() {
         <div className="flex flex-col justify-center">
           <SectionHeading index="01" kicker={ABOUT.kicker} />
 
-          <h2 className="reveal display mt-7 text-balance text-4xl text-ivory sm:text-5xl lg:text-[3.4rem]">
+          <h2 className="reveal display mt-5 sm:mt-7 text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] text-ivory">
             {ABOUT.headline}
           </h2>
 
-          <div className="mt-8 space-y-5">
+          <div className="mt-6 sm:mt-8 space-y-4 sm:space-y-5">
             {ABOUT.body.map((p, i) => (
               <p
                 key={i}
-                className="reveal max-w-xl text-base leading-relaxed text-ivory/70"
+                className="reveal max-w-xl text-sm sm:text-base leading-relaxed text-ivory/70"
                 style={{ transitionDelay: `${i * 90}ms` }}
               >
                 {p}
@@ -67,17 +67,17 @@ export default function About() {
           </div>
 
           {/* Stats */}
-          <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4">
+          <dl className="mt-8 sm:mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg sm:rounded-xl border border-line bg-line sm:grid-cols-4">
             {ABOUT.stats.map((s, i) => (
               <div
                 key={i}
-                className="reveal bg-bg p-5"
+                className="reveal bg-bg p-3 sm:p-5"
                 style={{ transitionDelay: `${i * 70}ms` }}
               >
-                <dt className="text-gold-grad font-display text-2xl sm:text-3xl font-extrabold">
+                <dt className="text-gold-grad font-display text-xl sm:text-2xl md:text-3xl font-extrabold">
                   {s.value}
                 </dt>
-                <dd className="mt-2 text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+                <dd className="mt-1 sm:mt-2 text-[0.65rem] sm:text-[0.7rem] uppercase tracking-[0.12em] text-muted">
                   {s.label}
                 </dd>
               </div>

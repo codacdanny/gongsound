@@ -39,24 +39,24 @@ export default function News() {
   }, []);
 
   return (
-    <section id="news" ref={ref} className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <section id="news" ref={ref} className="relative py-16 sm:py-24 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-5 md:px-8">
+        <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <SectionHeading index="02" kicker="News & updates" />
-            <h2 className="reveal display mt-6 max-w-2xl text-4xl text-ivory sm:text-5xl lg:text-6xl">
+            <h2 className="reveal display mt-4 sm:mt-6 max-w-2xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ivory">
               Stories from the <span className="font-serif italic text-gold">culture.</span>
             </h2>
           </div>
           <Link
             href="/news"
-            className="reveal link-sweep self-start text-sm font-semibold uppercase tracking-[0.16em] text-gold md:self-end"
+            className="reveal link-sweep self-start text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] text-gold md:self-end"
           >
             Read more
           </Link>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 sm:mt-14 grid gap-4 sm:gap-6 md:grid-cols-3">
           {!isLoading && articles.map((n, i) => (
             <Link
               key={i}
@@ -66,7 +66,7 @@ export default function News() {
               className="reveal group flex flex-col rounded-2xl border border-line bg-bg-raise/40 overflow-hidden transition-colors hover:border-gold/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               {n.image && (
-                <div className="relative h-40 w-full overflow-hidden bg-bg">
+                <div className="relative h-32 sm:h-40 w-full overflow-hidden bg-bg">
                   <img
                     src={n.image}
                     alt={n.title}
@@ -75,24 +75,24 @@ export default function News() {
                 </div>
               )}
 
-              <div className="flex flex-col p-7">
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full border border-gold/40 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-gold">
+              <div className="flex flex-col p-4 sm:p-6 lg:p-7">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="rounded-full border border-gold/40 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[0.6rem] sm:text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-gold">
                     {n.tag}
                   </span>
-                  <span className="font-mono text-xs text-muted">{n.date}</span>
+                  <span className="font-mono text-xs text-muted whitespace-nowrap">{n.date}</span>
                 </div>
 
-                <h3 className="mt-6 font-display text-xl font-bold leading-snug text-ivory transition-colors group-hover:text-gold">
+                <h3 className="mt-4 sm:mt-6 font-display text-lg sm:text-xl font-bold leading-snug text-ivory transition-colors group-hover:text-gold">
                   {n.title}
                 </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-ivory/60">
+                <p className="mt-2 sm:mt-3 flex-1 text-xs sm:text-sm leading-relaxed text-ivory/60">
                   {n.excerpt}
                 </p>
 
-                <span className="mt-6 inline-flex items-center gap-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold">
+                <span className="mt-4 sm:mt-6 inline-flex items-center gap-1 sm:gap-1.5 text-[0.68rem] sm:text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold">
                   Read story
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
+                  <ArrowUpRight className="h-3 sm:h-4 w-3 sm:w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
                 </span>
               </div>
             </Link>

@@ -44,33 +44,33 @@ export default function Artists() {
   }
 
   return (
-    <section id="artists" ref={ref} className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <section id="artists" ref={ref} className="relative py-16 sm:py-24 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-5 md:px-8">
+        <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <SectionHeading index="04" kicker="The roster" />
-            <h2 className="reveal display mt-6 max-w-2xl text-4xl text-ivory sm:text-5xl lg:text-6xl">
+            <h2 className="reveal display mt-4 sm:mt-6 max-w-2xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ivory">
               The voices of the <span className="font-serif italic text-gold">movement.</span>
             </h2>
           </div>
-          <p className="reveal max-w-xs text-sm leading-relaxed text-ivory/60">
+          <p className="reveal max-w-xs text-xs sm:text-sm leading-relaxed text-ivory/60">
             ten artists. One sound rooted in culture, built to travel beyond
             home.
           </p>
         </div>
 
         {isLoading ? (
-          <div className="mt-16 text-center py-20">
-            <p className="text-ivory/60">Loading artists...</p>
+          <div className="mt-12 sm:mt-16 text-center py-16 sm:py-20">
+            <p className="text-ivory/60 text-sm">Loading artists...</p>
           </div>
         ) : (
-          <ul className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
+          <ul className="mt-12 sm:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-lg sm:rounded-2xl border border-line bg-line sm:grid-cols-3 lg:grid-cols-4">
             {artists.map((artist, i) => (
               <li key={artist.id} style={{ transitionDelay: `${(i % 4) * 60}ms` }} className="reveal">
                 <a
                   href="mailto:3point6@gongsoundentertainment.com"
                   data-cursor-label="View"
-                  className="group relative flex aspect-[4/5] flex-col justify-between overflow-hidden bg-bg p-5 transition-colors hover:bg-bg-raise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold"
+                  className="group relative flex aspect-4/5 flex-col justify-between overflow-hidden bg-bg p-3 sm:p-5 transition-colors hover:bg-bg-raise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold"
                 >
                   <span className="font-mono text-xs text-muted">
                     {(i + 1).toString().padStart(2, "0")}
@@ -86,17 +86,17 @@ export default function Artists() {
                   ) : (
                     <span
                       aria-hidden
-                      className="text-gold-grad pointer-events-none absolute inset-0 flex items-center justify-center font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold opacity-15 transition-all duration-500 group-hover:scale-110 group-hover:opacity-30"
+                      className="text-gold-grad pointer-events-none absolute inset-0 flex items-center justify-center font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold opacity-15 transition-all duration-500 group-hover:scale-110 group-hover:opacity-30"
                     >
                       {initials(artist.name)}
                     </span>
                   )}
 
                   <div className="relative">
-                    <h3 className="font-display text-lg font-bold leading-tight text-ivory transition-colors group-hover:text-gold sm:text-xl">
+                    <h3 className="font-display text-base sm:text-lg font-bold leading-tight text-ivory transition-colors group-hover:text-gold md:text-xl">
                       {artist.name}
                     </h3>
-                    <span className="label mt-1 block !text-[0.55rem] text-muted">
+                    <span className="label mt-0.5 sm:mt-1 block text-[0.5rem] sm:text-[0.55rem] text-muted">
                       Artist
                     </span>
                   </div>

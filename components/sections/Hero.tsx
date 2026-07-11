@@ -85,7 +85,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 pb-16 pt-24 sm:pb-24 sm:pt-28 sm:px-8"
+      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pb-12 pt-20 sm:px-5 sm:pb-16 sm:pt-24 md:px-8 md:pb-24 md:pt-28"
     >
       {/* Ambient gold glow */}
       <div
@@ -159,7 +159,7 @@ export default function Hero() {
         </div>
 
         {/* Lower grid: intro + meta */}
-        <div className="mt-10 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
+        <div className="mt-6 sm:mt-10 grid gap-4 sm:gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
           <motion.p
             initial="hide"
             animate={v}
@@ -175,7 +175,7 @@ export default function Hero() {
             animate={v}
             variants={{ hide: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.8, ease, delay: 0.42 }}
-            className="flex flex-col items-start gap-6 md:items-end"
+            className="flex flex-col items-start gap-4 sm:gap-6 md:items-end"
           >
             <div className="flex items-start gap-2.5 text-left md:text-right">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
