@@ -24,16 +24,28 @@ export default function Preloader() {
     const start = performance.now();
     const DUR = 1900;
     let raf = 0;
+
+    // Safety timeout - ensures preloader doesn't block page indefinitely (especially on mobile)
+    const safetyTimeout = setTimeout(() => {
+      setDone(true);
+    }, 3000);
+
     const loop = (now: number) => {
       const p = Math.min(1, (now - start) / DUR);
       // ease-out cubic
       const eased = 1 - Math.pow(1 - p, 3);
       setCount(Math.round(eased * 100));
       if (p < 1) raf = requestAnimationFrame(loop);
-      else setTimeout(() => setDone(true), 280);
+      else {
+        clearTimeout(safetyTimeout);
+        setTimeout(() => setDone(true), 280);
+      }
     };
     raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(safetyTimeout);
+    };
   }, []);
 
   useEffect(() => {
