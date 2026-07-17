@@ -85,7 +85,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pb-12 pt-20 sm:px-5 sm:pb-16 sm:pt-24 md:px-8 md:pb-24 md:pt-28"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden px-4 pb-12 pt-20 sm:px-5 sm:pb-16 sm:pt-24 md:px-8 md:pb-24 md:pt-28"
+      style={{ minHeight: "100dvh" }}
     >
       {/* Ambient gold glow */}
       <div
