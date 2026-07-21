@@ -118,7 +118,7 @@ export default function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] flex flex-col bg-bg/95 backdrop-blur-2xl lg:hidden"
+            className="fixed inset-0 z-[60] flex flex-col bg-bg/95 backdrop-blur-md lg:hidden"
           >
             <div className="flex items-center justify-between px-5 py-4 sm:px-8">
               <Wordmark onClick={() => setOpen(false)} />

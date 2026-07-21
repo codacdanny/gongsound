@@ -34,10 +34,10 @@ export default function Contact() {
 
   return (
     <section id="contact" ref={ref} className="relative overflow-hidden py-32 sm:py-48">
-      {/* Massive gold radial glow */}
+      {/* Massive gold radial glow — capped on mobile to avoid GPU memory crashes */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-1/4 left-1/2 -z-10 h-[140vh] w-[140vw] -translate-x-1/2 rounded-full opacity-60 blur-[140px]"
+        className="pointer-events-none absolute -bottom-1/4 left-1/2 -z-10 h-[60vh] w-[100vw] -translate-x-1/2 rounded-full opacity-60 blur-[60px] md:h-[140vh] md:w-[140vw] md:blur-[140px]"
         style={{
           background:
             "radial-gradient(circle, rgba(230,184,76,0.25), rgba(169,120,28,0.08), transparent 60%)",

@@ -88,11 +88,11 @@ export default function Hero() {
       className="relative flex min-h-screen flex-col justify-center overflow-hidden px-4 pb-12 pt-20 sm:px-5 sm:pb-16 sm:pt-24 md:px-8 md:pb-24 md:pt-28"
       style={{ minHeight: "100dvh" }}
     >
-      {/* Ambient gold glow */}
+      {/* Ambient gold glow — capped on mobile to avoid GPU memory crashes */}
       <div
         ref={glowRef}
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[42%] -z-10 h-[80vh] w-[80vh] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70 blur-[100px]"
+        className="pointer-events-none absolute left-1/2 top-[42%] -z-10 h-[55vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70 blur-[55px] md:h-[80vh] md:w-[80vh] md:blur-[100px]"
         style={{
           background:
             "radial-gradient(circle, rgba(230,184,76,0.22) 0%, rgba(169,120,28,0.08) 40%, transparent 70%)",
