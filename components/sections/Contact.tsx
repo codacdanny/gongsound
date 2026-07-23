@@ -37,7 +37,7 @@ export default function Contact() {
       {/* Massive gold radial glow — capped on mobile to avoid GPU memory crashes */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-1/4 left-1/2 -z-10 h-[60vh] w-[100vw] -translate-x-1/2 rounded-full opacity-60 blur-[60px] md:h-[140vh] md:w-[140vw] md:blur-[140px]"
+        className="pointer-events-none absolute -bottom-1/4 left-1/2 -z-10 h-[60vh] w-[100vw] -translate-x-1/2 rounded-full opacity-60 md:h-[140vh] md:w-[140vw] md:blur-[140px]"
         style={{
           background:
             "radial-gradient(circle, rgba(230,184,76,0.25), rgba(169,120,28,0.08), transparent 60%)",
@@ -66,7 +66,7 @@ export default function Contact() {
         {/* Form + contact info grid */}
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
           {/* Form */}
-          <div className="reveal rounded-2xl border border-gold/40 bg-gradient-to-b from-bg-raise/60 to-bg/40 p-6 sm:p-8 lg:p-12 backdrop-blur-xl">
+          <div className="reveal min-w-0 rounded-2xl border border-gold/40 bg-gradient-to-b from-bg-raise/60 to-bg/40 p-5 sm:p-8 lg:p-12 backdrop-blur-xl">
             {status === "done" ? (
               <div className="flex h-full min-h-[24rem] sm:min-h-[32rem] flex-col items-center justify-center text-center">
                 <span className="mb-4 sm:mb-5 flex h-16 sm:h-20 w-16 sm:w-20 items-center justify-center rounded-full bg-gold text-bg">
@@ -155,8 +155,8 @@ export default function Contact() {
           </div>
 
           {/* Contact info + location */}
-          <div className="flex flex-col justify-center">
-            <div className="reveal rounded-2xl border border-gold/30 bg-bg-raise/50 p-6 sm:p-8 backdrop-blur-sm overflow-hidden">
+          <div className="flex min-w-0 flex-col justify-center">
+            <div className="reveal min-w-0 rounded-2xl border border-gold/30 bg-bg-raise/50 p-5 sm:p-8 backdrop-blur-sm overflow-hidden">
               <p className="label mb-2 sm:mb-4 text-gold text-xs sm:text-sm">Reach us</p>
               <a
                 href={`mailto:${SITE.email}`}

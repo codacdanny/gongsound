@@ -57,10 +57,12 @@ export default function SoundWave({
     );
     io.observe(canvas);
 
-    const gap = 3;
     const draw = (t = 0) => {
       ctx.clearRect(0, 0, w, h);
-      const bw = (w - gap * (bars - 1)) / bars;
+      // Shrink the inter-bar gap on narrow canvases so bar width can never go
+      // negative (a negative roundRect radius throws and crashes the render).
+      const gap = Math.min(3, w / (bars * 2));
+      const bw = Math.max(0.5, (w - gap * (bars - 1)) / bars);
       const time = t * 0.001;
       for (let i = 0; i < bars; i++) {
         const s = seeds[i];
@@ -77,7 +79,7 @@ export default function SoundWave({
         grad.addColorStop(0, "rgba(247,216,119,0.95)");
         grad.addColorStop(1, "rgba(169,120,28,0.55)");
         ctx.fillStyle = grad;
-        const r = Math.min(bw / 2, 2);
+        const r = Math.max(0, Math.min(bw / 2, 2));
         ctx.beginPath();
         ctx.roundRect(x, y, bw, bh, r);
         ctx.fill();

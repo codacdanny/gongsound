@@ -47,7 +47,7 @@ export default function Album() {
       {/* warm radial backdrop — capped on mobile to avoid GPU memory crashes */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[40vh] w-[85vw] -translate-x-1/2 rounded-full opacity-60 blur-[55px] md:h-[60vh] md:w-[90vw] md:blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[40vh] w-[85vw] -translate-x-1/2 rounded-full opacity-60 md:h-[60vh] md:w-[90vw] md:blur-[120px]"
         style={{
           background:
             "radial-gradient(circle, rgba(169,120,28,0.18), transparent 65%)",

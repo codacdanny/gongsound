@@ -41,13 +41,10 @@ export default function Hero() {
   const waveRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion()) {
-      setReady(true);
-      return;
-    }
+    // Reveal as the preloader curtain lifts. A fallback guarantees the hero
+    // never stays hidden if the preloader was skipped or its event missed.
     const onReveal = () => setReady(true);
     window.addEventListener("gs:revealed", onReveal);
-    // Fallback in case the preloader was skipped.
     const fb = setTimeout(() => setReady(true), 2600);
     return () => {
       window.removeEventListener("gs:revealed", onReveal);
@@ -92,7 +89,7 @@ export default function Hero() {
       <div
         ref={glowRef}
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[42%] -z-10 h-[55vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70 blur-[55px] md:h-[80vh] md:w-[80vh] md:blur-[100px]"
+        className="pointer-events-none absolute left-1/2 top-[42%] -z-10 h-[55vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70 md:h-[80vh] md:w-[80vh] md:blur-[100px]"
         style={{
           background:
             "radial-gradient(circle, rgba(230,184,76,0.22) 0%, rgba(169,120,28,0.08) 40%, transparent 70%)",

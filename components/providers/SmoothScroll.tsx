@@ -17,6 +17,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     gsap.registerPlugin(ScrollTrigger);
 
+    // Skip Lenis inertia scroll on touch devices — native scrolling is more
+    // reliable on mobile, and anchor links fall back to the browser's own
+    // smooth scroll. ScrollTrigger still runs off the native scroll position.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

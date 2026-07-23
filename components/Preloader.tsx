@@ -14,7 +14,12 @@ export default function Preloader() {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (prefersReducedMotion()) {
+    // Skip the counter curtain on very small screens and for reduced-motion
+    // users — reveal the page immediately instead.
+    const smallScreen =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 320px)").matches;
+    if (prefersReducedMotion() || smallScreen) {
       setDone(true);
       return;
     }
