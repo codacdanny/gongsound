@@ -164,6 +164,13 @@ export default function Contact() {
               >
                 {SITE.email}
               </a>
+             <p className=" text-ivory/60 break-all block text-base">Or reach us for partnerships and collaborations at:</p> 
+              <a
+                href={`mailto:${SITE.email2}`}
+                className="reveal link-sweep block font-display text-base sm:text-xl lg:text-2xl font-bold text-gold leading-snug break-all"
+              >
+                {SITE.email2}
+              </a>
 
               <div className="reveal mt-6 sm:mt-8 space-y-4 sm:space-y-6 border-t border-line pt-6 sm:pt-8">
                 <div>
